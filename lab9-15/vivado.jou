@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Mon Oct  4 15:59:23 2021
+# Process ID: 18060
+# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15840 C:\Users\rodri\Documents\nrod968\School\2021_Fall\ECE-369A\lab9-15\lab9-15.xpr
+# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/vivado.log
+# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.xpr
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/DataMemory.v w ]
+add_files C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/DataMemory.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit2To1.v w ]
+add_files C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit2To1.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/RegisterFile.v w ]
+add_files C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/RegisterFile.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALU32Bit.v w ]
+add_files C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALU32Bit.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/SignExtension.v w ]
+add_files C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/SignExtension.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+file mkdir C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v w ]
+add_files -fileset sim_1 C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/DataMemory_tb.v w ]
+add_files -fileset sim_1 C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/DataMemory_tb.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v w ]
+add_files -fileset sim_1 C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/SignExtension_tb.v w ]
+add_files -fileset sim_1 C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/SignExtension_tb.v
+close [ open C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/RegisterFile_tb.v w ]
+add_files -fileset sim_1 C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/RegisterFile_tb.v
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
