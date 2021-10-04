@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../Resources/1-InstructionFetchUnit/InstructionFetchUnit.v" \
+"../../../../../Resources/1-InstructionFetchUnit/InstructionMemory.v" \
+"../../../../../Resources/1-InstructionFetchUnit/PCAdder.v" \
+"../../../../../Resources/1-InstructionFetchUnit/ProgramCounter.v" \
+"../../../../lab1.srcs/sim_1/new/InstructionFetchUnit_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

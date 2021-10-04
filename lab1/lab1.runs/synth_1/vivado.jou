@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue Sep  7 13:28:37 2021
+# Process ID: 18848
+# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.runs/synth_1
+# Command line: vivado.exe -log TopLevel.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TopLevel.tcl
+# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.runs/synth_1/TopLevel.vds
+# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source TopLevel.tcl -notrace

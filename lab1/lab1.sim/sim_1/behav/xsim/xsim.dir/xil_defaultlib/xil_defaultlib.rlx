@@ -1,0 +1,10 @@
+0.6
+2018.2
+Jun 14 2018
+20:41:02
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/InstructionFetchUnit.v,1630977619,verilog,,C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/InstructionMemory.v,,InstructionFetchUnit,,,,,,,,
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/InstructionMemory.v,1630729528,verilog,,C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/PCAdder.v,,InstructionMemory,,,,,,,,
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/PCAdder.v,1630443015,verilog,,C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/ProgramCounter.v,,PCAdder,,,,,,,,
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/Resources/1-InstructionFetchUnit/ProgramCounter.v,1630366417,verilog,,C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.srcs/sim_1/new/InstructionFetchUnit_tb.v,,ProgramCounter,,,,,,,,
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.srcs/sim_1/new/InstructionFetchUnit_tb.v,1630967312,verilog,,,,InstructionFetchUnit_tb,,,,,,,,

@@ -1,0 +1,8 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"ProgramCounter_tb_func_synth.v" \
+"../../../../../../Resources/1-InstructionFetchUnit/ProgramCounter.v" \
+"../../../../../../Resources/1-InstructionFetchUnit/ProgramCounter_tb.v" \
+
+# Do not sort compile order
+nosort

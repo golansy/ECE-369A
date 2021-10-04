@@ -1,0 +1,10 @@
+asize14: .word    4, 4, 4, 4,
+frame14: .word    9, 9, 9, 9, 
+         .word    9, 9, 9, 9, 
+         .word    9, 9, 9, 9, 
+         .word    9, 9, 9, 9,
+                  
+window14:   .word    9, 9, 9, 9, 
+            .word    9, 9, 9, 9, 
+            .word    9, 9, 9, 9, 
+            .word    9, 9, 9, 9,

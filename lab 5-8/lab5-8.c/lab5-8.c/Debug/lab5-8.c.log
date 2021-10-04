@@ -1,0 +1,4 @@
+﻿  main.c
+c:\users\rodri\documents\nrod968\school\2021_fall\ece 369a\lab 5-8\lab5-8.c\lab5-8.c\main.c(48): warning C4474: 'fscanf' : too many arguments passed for format string
+  c:\users\rodri\documents\nrod968\school\2021_fall\ece 369a\lab 5-8\lab5-8.c\lab5-8.c\main.c(48): note: placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+  lab5-8.c.vcxproj -> C:\Users\rodri\Documents\nrod968\School\2021_Fall\ECE 369A\lab 5-8\lab5-8.c\Debug\lab5-8.c.exe
