@@ -35,6 +35,81 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
 	output [31:0] ALUResult;	// answer
 	output Zero;	    // Zero=1 if ALUResult == 0
 
-    /* Please fill in the implementation here... */
+	reg [31:0] temp;
+	
+    integer i, flag;
+    
+    always @(ALUControl, A, B) begin
+        ALUResult = 0;
+    case (ALUControl) 
+    4'b0000 : begin
+        ALUResult <= A + B;
+    end
+    4'b0001 : begin
+        ALUResult <= A - B;
+    end
+    4'b0010 : begin
+        ALUResult <= A * B;
+    end
+    4'b0011 : begin
+        ALUResult <= A & B;
+    end
+    4'b0100 : begin
+        ALUResult <= A | B;
+    end
+    4'b0101 : begin
+        ALUResult <= (A < B);
+    end
+    4'b0110 : begin
+        ALUResult <= (A == B);
+    end
+    4'b0111 : begin
+        ALUResult <= (A != B);
+    end
+    4'b1000 : begin
+    
+        ALUResult <= A << B;
+     
+    end
+    4'b1001 : begin
+       
+        ALUResult <= A >> B;
+    
+    end
+    4'b1010 : begin  
+        i = 31;
+       while ((i >= 0) && (A[i] == 1)) begin
+            i = i - 1;
+       end
+           
+           ALUResult = (31 - i); 
+            
+    end
+
+    4'b1011 : begin
+        i = 31;
+       while ((i >= 0) && (A[i] == 0)) begin
+            i = i - 1;
+       end
+           
+           ALUResult = (31 - i); 
+            
+    end
+
+    default: begin 
+        ALUResult <= ALUResult;
+    end
+     
+    endcase
+    end
+
+    always @(ALUResult) begin
+        if (ALUResult == 0) begin
+            Zero <= 1;
+        end
+        else begin 
+            Zero <= 0;
+        end
+    end
 
 endmodule
