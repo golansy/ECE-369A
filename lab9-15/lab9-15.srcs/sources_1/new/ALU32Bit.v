@@ -28,7 +28,7 @@
 
 module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
 
-	input [3:0] ALUControl; // control bits for ALU operation
+	input [4:0] ALUControl; // control bits for ALU operation
                                 // you need to adjust the bitwidth as needed
 	input [31:0] A, B;	    // inputs
 
@@ -43,56 +43,89 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
     always @(ALUControl, A, B) begin
         ALUResult = 0;
     case (ALUControl) 
-    4'b0000 : begin //AND
+    5'b00000 : begin //AND
         ALUResult <= A & B;
     end
-    4'b0001 : begin //OR
+    5'b00001 : begin //OR
         ALUResult <= A | B;
     end
-    4'b0010 : begin //add
+    5'b00010 : begin //add
         ALUResult <= A + B;
     end
-    4'b0011 : begin //shift left logical
-        ALUResult <= A << B;
+    5'b00011 : begin //shift left logical
+        ALUResult <= B << A;
     end
-    4'b0100 : begin //shift right logical
-        ALUResult <= A >> B;
+    5'b00100 : begin //shift right logical
+        ALUResult <= B >> A;
     end
-    4'b0101 : begin //multiply
+    5'b00101 : begin //multiply
         temp <= A * B;
 		temp [63:30] <= hi;
 		temp [31:0] <= lo;
 		ALUResult <= lo;
     end
-    4'b0110 : begin //sub
+    5'b00110 : begin //sub
         ALUResult <= A - B;
     end
-    4'b0111 : begin //set less than
-        ALUResult <= (A < B);
+    5'b00111 : begin //set less than
+        if(A < B)
+            ALUResult <= 1'b1;
+        else
+            ALUResult <= 1'b0;
     end
-    4'b1000 : begin //madd 
+    5'b01000 : begin //madd 
         temp <= A * B;
 		hi <= hi + temp[63:30];
 		lo <= lo + temp[31:0];    
     end
-    4'b1001 : begin //msub  
+    5'b01001 : begin //msub  
         temp <= A * B;
 		hi <= hi - temp[63:30];
 		lo <= lo - temp[31:0];
     end
-
-	4'b1010 : begin //lui
-		ALUResult <= {B[16:0],16'b0};
+	5'b01010 : begin //lui
+		ALUResult <= {B[15:0],16'b0};
 	end
-
-	4'b1100 : begin //NOR
+    5'b01011 : begin //mthi 
+        hi <= A;   
+    end
+	5'b01100 : begin //NOR
 		ALUResult <= ~(A | B);
 	end
-
-	4'b1101 : begin //XOR
+	5'b01101 : begin //XOR
 		ALUResult <= A ^ B;
 	end
-
+    5'b01110 : begin //mtlo
+        lo <= A;
+    end
+    5'b01111 : begin //mfhi
+       // A <= hi;
+        ALUResult <= hi;
+    end
+    5'b10000 : begin //mflo
+        //A <= lo;
+        ALUResult <= lo;
+    end
+    5'b10001 : begin //add 16-bit for sh and lh
+        ALUResult <= A[15:0] + B[15:0];
+    end
+    5'b10010 : begin //add 8-bit for lb and sb
+        ALUResult <= A[7:0] + B[7:0];
+    end
+    5'b10011 : begin //movn
+        if(B != 0)
+            ALUResult <= A;
+    end
+    5'b10100 : begin //movz
+        if(B == 0)
+            ALUResult <= A;
+    end
+    5'b10101 : begin //rotrv and rotr
+        ALUResult <= (B >> A) | (B << ~A);
+    end
+    5'b10110 : begin 
+        
+    end
     default: begin 
         ALUResult <= ALUResult;
     end
