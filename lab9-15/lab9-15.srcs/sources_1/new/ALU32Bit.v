@@ -32,69 +32,66 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
                                 // you need to adjust the bitwidth as needed
 	input [31:0] A, B;	    // inputs
 
-	output [31:0] ALUResult;	// answer
-	output Zero;	    // Zero=1 if ALUResult == 0
+	output reg [31:0] ALUResult;	// answer
+	output reg Zero;	    // Zero=1 if ALUResult == 0
 
-	reg [31:0] temp;
-	
+	reg [31:0] hi, lo;
+	reg [63:0] temp;
+ 	
     integer i, flag;
     
     always @(ALUControl, A, B) begin
         ALUResult = 0;
     case (ALUControl) 
-    4'b0000 : begin
-        ALUResult <= A + B;
-    end
-    4'b0001 : begin
-        ALUResult <= A - B;
-    end
-    4'b0010 : begin
-        ALUResult <= A * B;
-    end
-    4'b0011 : begin
+    4'b0000 : begin //AND
         ALUResult <= A & B;
     end
-    4'b0100 : begin
+    4'b0001 : begin //OR
         ALUResult <= A | B;
     end
-    4'b0101 : begin
+    4'b0010 : begin //add
+        ALUResult <= A + B;
+    end
+    4'b0011 : begin //shift left logical
+        ALUResult <= A << B;
+    end
+    4'b0100 : begin //shift right logical
+        ALUResult <= A >> B;
+    end
+    4'b0101 : begin //multiply
+        temp <= A * B;
+		temp [63:30] <= hi;
+		temp [31:0] <= lo;
+		ALUResult <= lo;
+    end
+    4'b0110 : begin //sub
+        ALUResult <= A - B;
+    end
+    4'b0111 : begin //set less than
         ALUResult <= (A < B);
     end
-    4'b0110 : begin
-        ALUResult <= (A == B);
+    4'b1000 : begin //madd 
+        temp <= A * B;
+		hi <= hi + temp[63:30];
+		lo <= lo + temp[31:0];    
     end
-    4'b0111 : begin
-        ALUResult <= (A != B);
-    end
-    4'b1000 : begin
-    
-        ALUResult <= A << B;
-     
-    end
-    4'b1001 : begin
-       
-        ALUResult <= A >> B;
-    
-    end
-    4'b1010 : begin  
-        i = 31;
-       while ((i >= 0) && (A[i] == 1)) begin
-            i = i - 1;
-       end
-           
-           ALUResult = (31 - i); 
-            
+    4'b1001 : begin //msub  
+        temp <= A * B;
+		hi <= hi - temp[63:30];
+		lo <= lo - temp[31:0];
     end
 
-    4'b1011 : begin
-        i = 31;
-       while ((i >= 0) && (A[i] == 0)) begin
-            i = i - 1;
-       end
-           
-           ALUResult = (31 - i); 
-            
-    end
+	4'b1010 : begin //lui
+		ALUResult <= {B[16:0],16'b0};
+	end
+
+	4'b1100 : begin //NOR
+		ALUResult <= ~(A | B);
+	end
+
+	4'b1101 : begin //XOR
+		ALUResult <= A ^ B;
+	end
 
     default: begin 
         ALUResult <= ALUResult;
