@@ -60,8 +60,8 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
     end
     5'b00101 : begin //multiply
         temp <= A * B;
-		temp [63:30] <= hi;
-		temp [31:0] <= lo;
+        hi <= temp[63:32];
+        lo <= temp[31:0];
 		ALUResult <= lo;
     end
     5'b00110 : begin //sub
@@ -75,12 +75,12 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
     end
     5'b01000 : begin //madd 
         temp <= A * B;
-		hi <= hi + temp[63:30];
+		hi <= hi + temp[63:32];
 		lo <= lo + temp[31:0];    
     end
     5'b01001 : begin //msub  
         temp <= A * B;
-		hi <= hi - temp[63:30];
+		hi <= hi - temp[63:32];
 		lo <= lo - temp[31:0];
     end
 	5'b01010 : begin //lui
@@ -123,8 +123,8 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
     5'b10101 : begin //rotrv and rotr
         ALUResult <= (B >> A) | (B << ~A);
     end
-    5'b10110 : begin 
-        
+    5'b10110 : begin //sra
+        ALUResult <= B <<< A;
     end
     default: begin 
         ALUResult <= ALUResult;
