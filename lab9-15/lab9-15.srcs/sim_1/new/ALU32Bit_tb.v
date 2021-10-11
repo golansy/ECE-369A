@@ -25,7 +25,7 @@ module ALU32Bit_tb();
 
 	initial begin
 	
-    /* Please fill in the implementation here... */
+    /* Please fill in the implementation here... */ // test
 	
 	end
 
