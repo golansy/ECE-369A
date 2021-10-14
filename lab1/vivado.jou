@@ -1,14 +1,14 @@
 #-----------------------------------------------------------
-# Vivado v2018.2 (64-bit)
-# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
-# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Mon Oct  4 15:36:31 2021
-# Process ID: 9372
-# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15956 C:\Users\rodri\Documents\nrod968\School\2021_Fall\ECE 369A\lab1\lab1.xpr
-# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/vivado.log
-# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1\vivado.jou
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Tue Oct 12 01:28:50 2021
+# Process ID: 10124
+# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5612 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab1\lab1.xpr
+# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/vivado.log
+# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project {C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE 369A/lab1/lab1.xpr}
+open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/lab1.xpr
 update_compile_order -fileset sources_1
