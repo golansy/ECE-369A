@@ -26,7 +26,7 @@
 //   operations needed to support. 
 ////////////////////////////////////////////////////////////////////////////////
 
-module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
+module ALU32Bit(ALUControl, A, B, ALUResult, Zero, hi, lo);
 
 	input [4:0] ALUControl; // control bits for ALU operation
                                 // you need to adjust the bitwidth as needed
@@ -35,7 +35,7 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero);
 	output reg [31:0] ALUResult;	// answer
 	output reg Zero;	    // Zero=1 if ALUResult == 0
 
-	reg [31:0] hi, lo;
+	output reg [31:0] hi, lo;
 	reg [63:0] temp;
  	
     integer i, flag;
