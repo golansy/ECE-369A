@@ -38,9 +38,9 @@ module ALU32Bit_tb();
     ALUControl <= 5'b00000;
     A <= 32'b1010; //10
     B <= 32'b1001; //9
-   // #200
+    #200
     //
-    
+
 	end
 
 endmodule
