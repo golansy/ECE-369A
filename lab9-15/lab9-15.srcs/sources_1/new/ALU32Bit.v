@@ -42,6 +42,8 @@ module ALU32Bit(ALUControl, A, B, ALUResult, Zero, hi, lo);
     
     always @(ALUControl, A, B) begin
         ALUResult = 0;
+       // hi <= 0;
+        //lo <= 0;
     case (ALUControl) 
     5'b00000 : begin //AND
         ALUResult <= A & B;
