@@ -91,12 +91,69 @@ module ALU32Bit_tb();
     B <= 32'b1000; //8
     #200
 
-    ALUControl <=  5'b01010;  //lui
-    A <= 32'b0;
+    ALUControl <= 5'b01010;  //lui
+    A <= 32'b0; //unused
     B <= 32'b1111111111111111;
     #200
 
-    
+    ALUControl <= 5'b01011; //mthi
+    A <= 32'b1;
+    B <= 32'b0; //unused
+    #200
+
+    ALUControl <= 5'b01100;  //NOR
+    A <= 32'b0111000110;
+    B <= 32'b0000110011;
+    #200
+
+    ALUControl <= 5'b01101;  //XOR
+    A <= 32'b0111000110;
+    B <= 32'b0000110011;
+    #200  
+
+    ALUControl <= 5'b01110;  //mtlo
+    A <= 32'b1;
+    B <= 32'b0; //unused
+    #200
+
+    ALUControl <= 5'b01111;  //mfhi
+    #200
+
+    ALUControl <= 5'b10000;  //mflo
+    #200
+
+    //skip testing 10001 and 10010 for now,
+    //implement later with signed 
+    //instructions???
+
+    ALUControl <= 5'b10011;  //movn
+    A <= 32'h3E8;
+    B <= 32'b1;
+    #200
+
+    ALUControl <= 5'b10011;  //movn but B==0
+    A <= 32'h3E7;
+    B <= 32'b0;
+    #200
+
+    ALUControl <= 5'b10100;  //movz
+    A <= 32'h3E6;
+    B <= 32'b0;
+    #200
+
+    ALUControl <= 5'b10100;  //movz but B!=0
+    A <= 32'h3E6;
+    B <= 32'b1;
+    #200
+
+    ALUControl <= 5'b10101;  //rotrv and rotr
+    A <= 32'b10;
+    B <= 32'b10010111;
+    #200
+
+    ALUControl <= 5'b10110;  //sra
+    A <= 32'b10;
+    B <= 32'b110001001;
 
 	end
 
