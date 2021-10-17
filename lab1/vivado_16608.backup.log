@@ -2,13 +2,20 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sat Oct 16 21:04:51 2021
-# Process ID: 18396
+# Start of session at: Sat Oct 16 20:28:03 2021
+# Process ID: 16608
 # Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18928 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab1\lab1.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18504 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab1\lab1.xpr
 # Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/vivado.log
 # Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1\vivado.jou
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/lab1.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2019.2/data/ip'.
 update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat Oct 16 20:36:57 2021...
