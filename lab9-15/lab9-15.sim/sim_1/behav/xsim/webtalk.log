@@ -1,19 +1,4 @@
 #-----------------------------------------------------------
-<<<<<<< HEAD
-# Webtalk v2019.2.1 (64-bit)
-# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
-# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sat Oct 16 13:17:11 2021
-# Process ID: 18828
-# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim
-# Command line: wbtcv.exe -mode batch -source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/DataMemory_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/webtalk.log
-# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim\webtalk.jou
-#-----------------------------------------------------------
-source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/DataMemory_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-INFO: [Common 17-186] 'C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/DataMemory_tb_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Sat Oct 16 13:17:12 2021. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2019.2/doc/webtalk_introduction.html.
-INFO: [Common 17-206] Exiting Webtalk at Sat Oct 16 13:17:12 2021...
-=======
 # Webtalk v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
@@ -27,4 +12,3 @@ INFO: [Common 17-206] Exiting Webtalk at Sat Oct 16 13:17:12 2021...
 source C:/Users/hayes/Desktop/Programming -notrace
 couldn't read file "C:/Users/hayes/Desktop/Programming": permission denied
 INFO: [Common 17-206] Exiting Webtalk at Sat Oct 16 15:34:22 2021...
->>>>>>> a9b88331d7735c42fde1f646bf20ccad7362ae0b

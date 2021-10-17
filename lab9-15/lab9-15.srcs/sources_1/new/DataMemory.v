@@ -48,7 +48,6 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
 
     always @(posedge Clk) begin
         if (MemRead == 1) ReadData <= memory[Address[11:2]];
-        else ReadData <= 0;
         if (MemWrite == 1) memory[Address[11:2]] <= WriteData;
     end
 

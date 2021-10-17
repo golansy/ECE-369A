@@ -28,30 +28,13 @@ module DataMemory_tb();
 
 	initial begin
 		Clk <= 1'b0;
-		MemWrite <= 0;
-	    MemRead <= 0;
 		forever #10 Clk <= ~Clk;
 	end
 
 	initial begin
-        @(posedge Clk);
-        #5;
-        Address <= 0;
-        WriteData <= 12;
-        MemRead <= 1;
-        MemWrite <= 1;
-        @(posedge Clk)
-        #5;
-        MemWrite <= 0;
-        @(posedge Clk);
-        #5;
-        Address <= 1;
-        WriteData <= 15;
-        MemWrite <= 1;
-        @(posedge Clk)
-        #5;
-        MemWrite <= 0;
-        @(posedge Clk);
+	
+    /* Please fill in the implementation here... */
+	
 	end
 
 endmodule
