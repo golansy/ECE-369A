@@ -26,17 +26,17 @@
 //   operations needed to support. 
 ////////////////////////////////////////////////////////////////////////////////
 
-module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output, lo_output);
+module ALU32Bit(ALUControl, A, B, hi_read, lo_read, ALUResult, Zero, hi_write, lo_write);
 
 	input [4:0] ALUControl; // control bits for ALU operation
                                 // you need to adjust the bitwidth as needed
 	input [31:0] A, B;	    // inputs
-    input [31:0] hi_input, lo_input;
+    input [31:0] hi_read, lo_read;
 
 	output reg [31:0] ALUResult;	// answer
 	output reg Zero;	    // Zero=1 if ALUResult == 0
 
-	output reg [31:0] hi_output, lo_input;
+	output reg [31:0] hi_write, lo_write;
 	reg [63:0] temp;
  	
     integer i, flag;
@@ -61,9 +61,9 @@ module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output
     end
     5'b00101 : begin //multiply
         temp <= A * B;
-        hi_output <= temp[63:32];
-        lo_output <= temp[31:0];
-		ALUResult <= lo_output;
+        hi_write <= temp[63:32];
+        lo_write <= temp[31:0];
+		ALUResult <= lo_write;
     end
     5'b00110 : begin //sub
         ALUResult <= A - B;
@@ -76,19 +76,19 @@ module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output
     end
     5'b01000 : begin //madd 
         temp <= A * B;
-		hi_output <= hi_input + temp[63:32];
-		lo_output <= lo_input + temp[31:0];    
+		hi_write <= hi_read + temp[63:32];
+		lo_write <= lo_read + temp[31:0];    
     end
     5'b01001 : begin //msub  
         temp <= A * B;
-		hi_output <= hi_input - temp[63:32];
-		lo_output <= lo_input - temp[31:0];
+		hi_write <= hi_read - temp[63:32];
+		lo_write <= lo_read - temp[31:0];
     end
 	5'b01010 : begin //lui
 		ALUResult <= {B[15:0],16'b0};
 	end
     5'b01011 : begin //mthi 
-        hi_output <= A;   
+        hi_write <= A;   
     end
 	5'b01100 : begin //NOR
 		ALUResult <= ~(A | B);
@@ -97,15 +97,15 @@ module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output
 		ALUResult <= A ^ B;
 	end
     5'b01110 : begin //mtlo
-        lo_output <= A;
+        lo_write <= A;
     end
     5'b01111 : begin //mfhi
        // A <= hi;
-        ALUResult <= hi_input;
+        ALUResult <= hi_read;
     end
     5'b10000 : begin //mflo
         //A <= lo;
-        ALUResult <= lo_input;
+        ALUResult <= lo_read;
     end
     5'b10001 : begin //add 16-bit for sh and lh
         ALUResult <= A[15:0] + B[15:0];
