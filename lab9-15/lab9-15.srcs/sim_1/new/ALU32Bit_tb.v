@@ -11,19 +11,22 @@ module ALU32Bit_tb();
 
 	reg [4:0] ALUControl;   // control bits for ALU operation
 	reg [31:0] A, B;	        // inputs
+    reg [31:0] hi_input, lo_input;
 
 	wire [31:0] ALUResult;	// answer
 	wire Zero;	        // Zero=1 if ALUResult == 0
-    wire [31:0] hi, lo;
+    wire [31:0] hi_output, lo_output;
 
     ALU32Bit u0(
         .ALUControl(ALUControl), 
         .A(A), 
-        .B(B), 
+        .B(B),
+        .hi_input(hi_input),
+        .lo_input(lo_input), 
         .ALUResult(ALUResult), 
         .Zero(Zero),
-        .hi(hi),
-        .lo(lo)
+        .hi_output(hi_output),
+        .lo_output(lo_output)
     );
 
 	initial begin
