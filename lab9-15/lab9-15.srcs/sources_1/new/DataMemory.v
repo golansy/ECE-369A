@@ -40,15 +40,21 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
     input [31:0] Address; 	// Input Address 
     input [31:0] WriteData; // Data that needs to be written into the address 
     input Clk;
-    input MemWrite; 		// Control signal for memory write 
-    input MemRead; 			// Control signal for memory read 
+    input MemWriteW, MemWriteHW, MemWriteB; 		// Control signal for memory write 
+    input MemReadW, MemReadHW, MemReadB; 			// Control signal for memory read 
 
     output reg[31:0] ReadData; // Contents of memory location at Address
-    reg[31:0] memory[0:1023];
+    reg [31:0] memory[0:1023];
 
     always @(posedge Clk) begin
-        if (MemRead == 1) ReadData <= memory[Address[11:2]];
-        if (MemWrite == 1) memory[Address[11:2]] <= WriteData;
+        if (MemReadW == 1) ReadData <= memory[Address[11:2]];          //Word
+        if (MemWriteW == 1) memory[Address[11:2]] <= WriteData;
+
+        if (MemReadHW == 1) ReadData[15:0] <= memory[Address[11:2]];   //Half-word
+        if (MemWriteHW == 1) memory[Address[11:2]] <= WriteData[15:0];
+
+        if (MemReadB == 1) ReadData[7:0] <= memory[Address[11:2]];     //Byte
+        if (MemWriteB == 1) memory[Address[11:2]] <= WriteData[7:0];
     end
 
 endmodule
