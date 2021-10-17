@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/16/2021 09:06:48 PM
+// Create Date: 10/17/2021 03:04:44 AM
 // Design Name: 
-// Module Name: Adder
+// Module Name: CombLogicForBranching
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Adder(InputA, InputB, Output);
-    input [31:0] InputA, InputB;
-    output reg [31:0] Output;
+module CombLogicForBranching(Zero, beq, blez, bltz, msb, branch, PCSrc);
+    input Zero, beq, blez, bltz, msb, branch;
+    output reg PCSrc;
 
     always @ * begin
-        Output <=  InputA + InputB;
+        PCSrc <= ( ( ( ( msb | Zero) ^ blez) | (beq ^ Zero) | (bltz ^ msb) ) & branch );
     end
 
 endmodule
