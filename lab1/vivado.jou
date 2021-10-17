@@ -11,3 +11,4 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/lab1.xpr
+update_compile_order -fileset sources_1
