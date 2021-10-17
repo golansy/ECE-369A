@@ -5,7 +5,7 @@
 // Module - SignExtension.v
 // Description - Sign extension module.
 ////////////////////////////////////////////////////////////////////////////////
-module SignExtension(in, ZeroExt out);
+module SignExtension(in, ZeroExt, out);
 
     /* A 16-Bit input word */
     input [15:0] in;
@@ -15,7 +15,7 @@ module SignExtension(in, ZeroExt out);
     output reg [31:0] out;
     
     always @ * begin
-        if (ZeroExt == 0) out <= {16{in[15]}, in};
+        if (ZeroExt == 0) out <= {{16{in[15]}}, in};
         if (ZeroExt == 1) out <= {16'b0, in};
     end
 
