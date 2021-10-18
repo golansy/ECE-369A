@@ -26,7 +26,7 @@
 //   operations needed to support. 
 ////////////////////////////////////////////////////////////////////////////////
 
-module ALU32Bit(ALUControl, A, B, hi_input, hi_input, ALUResult, Zero, hi_output, lo_output);
+module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output, lo_output);
 
 	input [4:0] ALUControl; // control bits for ALU operation
                                 // you need to adjust the bitwidth as needed
@@ -41,7 +41,7 @@ module ALU32Bit(ALUControl, A, B, hi_input, hi_input, ALUResult, Zero, hi_output
  	
     integer i, flag;
     
-    always @(ALUControl, A, B) begin
+    always @ B begin
         ALUResult = 0;
         case (ALUControl) 
             5'b00000 : begin //AND
