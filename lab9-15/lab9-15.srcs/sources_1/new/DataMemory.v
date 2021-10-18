@@ -35,26 +35,49 @@
 // of the "Address" input to index any of the 256 words. 
 ////////////////////////////////////////////////////////////////////////////////
 
-module DataMemory(Address, WriteData, Clk, MemWriteW, MemReadW, MemWriteHW, MemReadHW, MemWriteB, MemReadB, ReadData); 
+module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData); 
 
     input [31:0] Address; 	// Input Address 
     input [31:0] WriteData; // Data that needs to be written into the address 
     input Clk;
-    input MemWriteW, MemWriteHW, MemWriteB; 		// Control signal for memory write 
-    input MemReadW, MemReadHW, MemReadB; 			// Control signal for memory read 
+    input [1:0] MemWrite; 		// Control signal for memory write 
+    input [1:0] MemRead; 			// Control signal for memory read 
 
     output reg[31:0] ReadData; // Contents of memory location at Address
     reg [31:0] memory[0:1023];
 
     always @(posedge Clk) begin
-        if (MemReadW == 1) ReadData <= memory[Address[11:2]];          //Word
-        if (MemWriteW == 1) memory[Address[11:2]] <= WriteData;
-
-        if (MemReadHW == 1) ReadData[15:0] <= memory[Address[11:2]];   //Half-word
-        if (MemWriteHW == 1) memory[Address[11:2]] <= WriteData[15:0];
-
-        if (MemReadB == 1) ReadData[7:0] <= memory[Address[11:2]];     //Byte
-        if (MemWriteB == 1) memory[Address[11:2]] <= WriteData[7:0];
+        case (MemRead)
+            2'b00 : begin
+                ReadData <= 32'b0;
+            end
+            2'b01 : begin
+                ReadData <= memory[Address[11:2]];  //word 
+            end
+            2'b10 : begin    //halfword
+                ReadData <= memory[Address[11:2]];
+                ReadData <= {{16{1'b0}}, ReadData[Address[1] * 16 +: 15]};
+                ReadData <= {{16{ReadData[15]}}, ReadData[15:0]};
+            end
+            2'b11 : begin   //byte
+                ReadData <= memory[Address[11:2]];
+                ReadData <= {{24{1'b0}}, ReadData[Address[1:0] * 8 +: 7]};
+                ReadData <= {{24{ReadData[7]}}, ReadData[7:0]};
+            end
+        endcase
+        case (MemWrite)
+            2'b01 : begin
+                memory[Address[11:2]] <= WriteData;
+            end
+            2'b10 : begin
+                memory[Address[11:2]] <= memory[Address[11:2]] | (32'h0000ffff << (Address[1] * 16));
+                memory[Address[11:2]] <= memory[Address[11:2]] & (WriteData << (Address[1] * 16));
+            end
+            2'b11 : begin
+                memory[Address[11:2]] <= memory[Address[11:2]] | (32'h000000ff << (Address[1:0] * 8));
+                memory[Address[11:2]] <= memory[Address[11:2]] & (WriteData << (Address[1:0] * 8));
+            end
+        endcase
     end
 
 endmodule
