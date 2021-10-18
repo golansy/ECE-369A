@@ -20,9 +20,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-<<<<<<< HEAD
-module Adder();
-=======
 module Adder(InputA, InputB, Output);
     input [31:0] InputA, InputB;
     output reg [31:0] Output;
@@ -31,5 +28,4 @@ module Adder(InputA, InputB, Output);
         Output <=  InputA + InputB;
     end
 
->>>>>>> 37c0a9ca3a2a2d70ba04d631c9e2715a73d03eb8
 endmodule
