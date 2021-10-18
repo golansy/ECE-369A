@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/16/2021 09:06:48 PM
+// Create Date: 10/17/2021 02:59:03 AM
 // Design Name: 
-// Module Name: Adder
+// Module Name: ShiftLeft2
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,16 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-<<<<<<< HEAD
-module Adder();
-=======
-module Adder(InputA, InputB, Output);
-    input [31:0] InputA, InputB;
+module ShiftLeft2(InputA, Output);
+    input[31:0] InputA;
     output reg [31:0] Output;
 
     always @ * begin
-        Output <=  InputA + InputB;
+        Output <= InputA << 2;
     end
 
->>>>>>> 37c0a9ca3a2a2d70ba04d631c9e2715a73d03eb8
 endmodule

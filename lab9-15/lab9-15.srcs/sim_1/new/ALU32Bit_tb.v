@@ -11,22 +11,22 @@ module ALU32Bit_tb();
 
 	reg [4:0] ALUControl;   // control bits for ALU operation
 	reg [31:0] A, B;	        // inputs
-    reg [31:0] hi_input, lo_input;
+    reg [31:0] hi_read, lo_read;
 
 	wire [31:0] ALUResult;	// answer
 	wire Zero;	        // Zero=1 if ALUResult == 0
-    wire [31:0] hi_output, lo_output;
+    wire [31:0] hi_write, lo_write;
 
     ALU32Bit u0(
         .ALUControl(ALUControl), 
         .A(A), 
         .B(B),
-        .hi_input(hi_input),
-        .lo_input(lo_input), 
+        .hi_input(hi_read),
+        .lo_input(lo_read), 
         .ALUResult(ALUResult), 
         .Zero(Zero),
-        .hi_output(hi_output),
-        .lo_output(lo_output)
+        .hi_output(hi_write),
+        .lo_output(lo_write)
     );
 
 	initial begin
@@ -81,10 +81,79 @@ module ALU32Bit_tb();
     B <= 32'h20;  //32
     #200
 
-    ALUControl <= 5'b01000;  //madd ()
-    A <= 32'b1000;
-    B <= 32'b1000;
+    ALUControl <= 5'b01000;  //madd
+    A <= 32'b1000; //8
+    B <= 32'b1000; //8
     #200
+
+    ALUControl <= 5'b01001;  //msub
+    A <= 32'b1000; //8
+    B <= 32'b1000; //8
+    #200
+
+    ALUControl <= 5'b01010;  //lui
+    A <= 32'b0; //unused
+    B <= 32'b1111111111111111;
+    #200
+
+    ALUControl <= 5'b01011; //mthi
+    A <= 32'b1;
+    B <= 32'b0; //unused
+    #200
+
+    ALUControl <= 5'b01100;  //NOR
+    A <= 32'b0111000110;
+    B <= 32'b0000110011;
+    #200
+
+    ALUControl <= 5'b01101;  //XOR
+    A <= 32'b0111000110;
+    B <= 32'b0000110011;
+    #200  
+
+    ALUControl <= 5'b01110;  //mtlo
+    A <= 32'b1;
+    B <= 32'b0; //unused
+    #200
+
+    ALUControl <= 5'b01111;  //mfhi
+    #200
+
+    ALUControl <= 5'b10000;  //mflo
+    #200
+
+    //skip testing 10001 and 10010 for now,
+    //implement later with signed 
+    //instructions???
+
+    ALUControl <= 5'b10011;  //movn
+    A <= 32'h3E8;
+    B <= 32'b1;
+    #200
+
+    ALUControl <= 5'b10011;  //movn but B==0
+    A <= 32'h3E7;
+    B <= 32'b0;
+    #200
+
+    ALUControl <= 5'b10100;  //movz
+    A <= 32'h3E6;
+    B <= 32'b0;
+    #200
+
+    ALUControl <= 5'b10100;  //movz but B!=0
+    A <= 32'h3E6;
+    B <= 32'b1;
+    #200
+
+    ALUControl <= 5'b10101;  //rotrv and rotr
+    A <= 32'b10;
+    B <= 32'b10010111;
+    #200
+
+    ALUControl <= 5'b10110;  //sra
+    A <= 32'b10;
+    B <= 32'b110001001;
 
 	end
 

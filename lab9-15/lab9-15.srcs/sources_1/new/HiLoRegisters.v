@@ -20,37 +20,91 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module HiLoRegisters(Clk, hi_input, lo_input, ALUControl, hi_output, lo_output);
-    //inputs of this module are outputs of alu and vise versa
+module HiLoRegisters(Clk, hi_toALU, lo_toALU, ALUControl, hi_fromALU, lo_fromALU);
+    
     input Clk;
-    input [31:0] hi_input, lo_input;
+    output reg [31:0] hi_toALU, lo_toALU;
     input [4:0] ALUControl;
-    output reg [31:0] hi_output, lo_output;
+    input [31:0] hi_fromALU, lo_fromALU;
+    reg [31:0] hi_fromALU_reg, lo_fromALU_reg;
 
     reg [31:0] regFile_hi, regFile_lo;
-    reg [31:0] reg_hi_input, reg_lo_input;
+    reg Write_lo, Write_hi, Read_lo, Read_hi;
 
     initial begin
         regFile_hi <= 32'b0;
         regFile_lo <= 32'b0;
     end
 
-    always @ (posedge Clk) begin
-        reg_hi_input <= hi_input; //converting input to a reg
-        reg_lo_input <= lo_input; //
+    always begin
+
         case(ALUControl)
         5'b00101 : begin //multiply
-            reg_hi_input <= regFile_hi;
-            reg_lo_input <= regFile_lo;
+            Write_lo <= 1'b1;
+            Write_hi <= 1'b1;
+            Read_hi <= 1'b0;
+            Read_lo <= 1'b0;
         end
         5'b01000 : begin //madd
-            hi_output = regFile_hi;
-            lo_output = regFile_lo;
-            reg_hi_input = regFile_hi;
-            reg_lo_input = regFile_lo;
+            Write_lo <= 1'b1;
+            Write_hi <= 1'b1;
+            Read_hi <= 1'b1;
+            Read_lo <= 1'b1;
+        end
+        5'b01001 : begin //msub
+            Write_lo <= 1'b1;
+            Write_hi <= 1'b1;
+            Read_hi <= 1'b1;
+            Read_lo <= 1'b1;
+        end
+        5'b01011 : begin //mthi
+            Write_lo <= 1'b0;
+            Write_hi <= 1'b1;
+            Read_hi <= 1'b0;
+            Read_lo <= 1'b0;
+        end
+        5'b01110 : begin //mtlo
+            Write_lo <= 1'b1;
+            Write_hi <= 1'b0;
+            Read_hi <= 1'b0;
+            Read_lo <= 1'b0;
+        end
+        5'b01111 : begin //mfhi
+            Write_lo <= 1'b0;
+            Write_hi <= 1'b0;
+            Read_hi <= 1'b1;
+            Read_lo <= 1'b0;
+        end
+        5'b10000 : begin //mflo
+            Write_lo <= 1'b0;
+            Write_hi <= 1'b0;
+            Read_hi <= 1'b0;
+            Read_lo <= 1'b1;
+        end
+        default : begin
+            Write_lo <= 1'b0;
+            Write_hi <= 1'b0;
+            Read_hi <= 1'b0;
+            Read_lo <= 1'b0;
         end
         endcase
+    end
 
+    always @ (posedge Clk) begin
+        hi_fromALU_reg <= hi_fromALU;
+        lo_fromALU_reg <= lo_fromALU;
+        if(Write_lo == 1) begin
+            lo_fromALU_reg <= regFile_lo;
+        end  
+        if(Write_hi == 1) begin
+            hi_fromALU_reg <= regFile_hi;
+        end
+        if(Read_hi == 1) begin
+            regFile_hi <= hi_toALU;
+        end
+        if(Read_lo == 1) begin
+            regFile_lo <= lo_toALU;
+        end
     end
 
 endmodule
