@@ -1,0 +1,42 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Mon Oct 18 18:28:53 2021
+# Process ID: 6764
+# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7000 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
+# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/vivado.log
+# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2019.2/data/ip'.
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'ALU32Bit_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj ALU32Bit_tb_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALU32Bit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU32Bit
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU32Bit_tb
+ERROR: [VRFC 10-4982] syntax error near 'ALUControl' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:53]
+ERROR: [VRFC 10-2865] module 'ALU32Bit_tb' ignored due to previous errors [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:10]
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xvlog.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xvlog.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Oct 18 19:12:32 2021...

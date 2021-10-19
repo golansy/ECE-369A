@@ -2,10 +2,10 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Mon Oct 18 19:12:34 2021
-# Process ID: 12884
+# Start of session at: Mon Oct 18 18:28:53 2021
+# Process ID: 6764
 # Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17612 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7000 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
 # Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/vivado.log
 # Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15\vivado.jou
 #-----------------------------------------------------------
@@ -13,26 +13,3 @@ start_gui
 open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
 update_compile_order -fileset sources_1
 launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim
-launch_simulation
-source ALU32Bit_tb.tcl
-close_sim

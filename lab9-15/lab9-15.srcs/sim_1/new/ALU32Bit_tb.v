@@ -12,6 +12,7 @@ module ALU32Bit_tb();
 	reg [4:0] ALUControl;   // control bits for ALU operation
 	reg [31:0] A, B;	        // inputs
     reg [31:0] hi_read, lo_read;
+    reg Clk;
 
     reg [31:0] hi_actual, lo_actual;
     reg [31:0] ALUResult_actual;
@@ -21,6 +22,7 @@ module ALU32Bit_tb();
     wire [31:0] hi_write, lo_write;
 
     ALU32Bit u0(
+        .Clk(Clk),
         .ALUControl(ALUControl), 
         .A(A), 
         .B(B),
@@ -31,13 +33,18 @@ module ALU32Bit_tb();
         .hi_output(hi_write),
         .lo_output(lo_write)
     );
+    
+    initial begin
+    Clk <= 1'b1;
+	forever #5 Clk <= ~Clk;
+    end
 
 	initial begin
     
     #10
     A <= 32'b1010; //10
     B <= 32'b1001; //9
-    ALUResult_actual <= 32'b10000;
+    ALUResult_actual <= 32'b1000;
     ALUControl <= 5'b00000;  //and (result should be 32'b1000)
     #10
     
@@ -47,68 +54,101 @@ module ALU32Bit_tb();
     ALUControl <= 5'b00001;  //or (result should be 32'b11111111)
     #10
 
-    ALUControl <= 5'b00010;  //add (32 + 14 = 46)
     A <= 32; //32
     B <= 14;  //14
+    ALUResult_actual <= 46;
+    ALUControl <= 5'b00010;  //add (32 + 14 = 46)
+    #10
+    
+    A <= 32; //32
+    B <= -32;  //-32
+    ALUResult_actual <= 0;
+    ALUControl <= 5'b00010;  //add (32 + -32 = 0)
     #10
 
+    A <= 4; //4
+    B <= 32'b100001;
+    ALUResult_actual <= 32'b1000010000;
     ALUControl <= 5'b00011;  //shift left logical (by 4, result should be 32'b1000010000)
-    A <= 4; //4
-    B <= 32'b100001; 
     #10
 
+    A <= 4; //4
+    B <= 32'b100001;
+    ALUResult_actual <= 32'b10;
     ALUControl <= 5'b00100;  //shift right logical (by 4, result should be 32'b10)
-    A <= 4; //4
-    B <= 32'b100001; 
     #10
 
-    ALUControl <= 5'b00101;  //multiply (result should be 64)
     A <= 8;
     B <= 8;
+    ALUResult_actual <= 64;
+    hi_actual <= 32'b0;
+    lo_actual <= 32'b01000000;
+    ALUControl <= 5'b00101;  //multiply (result should be 64)
     #10
     
-    ALUControl <= 5'b00101;  //multiply (result should be 64)
     A <= 2000000000;
     B <= 2000000000;
+    ALUResult_actual <= 32'b10011101100100000000000000000000;
+    hi_actual <= 32'b00110111100000101101101011001110;
+    lo_actual <= 32'b10011101100100000000000000000000;
+    ALUControl <= 5'b00101;  //multiply (result should be 2643460096)
     #10
     
-    ALUControl <= 5'b00101;  //multiply (result should be -64)
     A <= 8;
     B <= -8;
+    ALUResult_actual <= {{26{1'b1}}, 6'b000000};
+    hi_actual <= {32{1'b1}};
+    lo_actual <= {{26{1'b1}}, 6'b000000};
+    ALUControl <= 5'b00101;  //multiply (result should be -64)
     #10
     
-    ALUControl <= 5'b00101;  //multiply (result should be 64)
     A <= 2000000000;
     B <= -2000000000;
+    ALUResult_actual <= 32'b01100010011100000000000000000000;
+    hi_actual <= 32'b11001000011111010010010100110001;
+    lo_actual <= 32'b01100010011100000000000000000000;
+    ALUControl <= 5'b00101;  //multiply (result should be 1,651,507,200)
     #10
 
-    ALUControl <= 5'b00110;  //sub (32 - 14 = 18)
     A <= 32; //32
     B <= 14;  //14
+    ALUResult_actual <= 18;
+    ALUControl <= 5'b00110;  //sub (32 - 14 = 18)
     #10
 
-    ALUControl <= 5'b00110;  //sub (32 - 32 = 0, Zero = 1)
     A <= 32; //32
     B <= 32;  //32
+    ALUResult_actual <= 0;
+    ALUControl <= 5'b00110;  //sub (32 - 32 = 0, Zero = 1)
+    #10
+    A <= 32; //32
+    B <= -32;  //-32
+    ALUResult_actual <= 0;
+    ALUControl <= 5'b00110;  //sub (32 - -32 = 64, Zero = 0)
     #10
 
-    ALUControl <= 5'b00111;  //set less than (32 < 14, result should be 32'b0)
     A <= 32; //32
     B <= 14;  //14
+    ALUResult_actual <= 32'b0;
+    ALUControl <= 5'b00111;  //set less than (32 < 14, result should be 32'b0)
     #10
 
-    ALUControl <= 5'b00111;  //set less than (14 < 32, result should be 32'b1)
     A <= 14;   //14
     B <= 32;  //32
+    ALUResult_actual <= 32'b1;
+    ALUControl <= 5'b00111;  //set less than (14 < 32, result should be 32'b1)
     #10
     
-    ALUControl <= 5'b00111;  //set less than (14 < 32, result should be 32'b0)
     A <= 14;   //14
     B <= 14;  //32
-    #10
+    ALUResult_actual <= 32'b0;
     ALUControl <= 5'b00111;  //set less than (14 < 32, result should be 32'b0)
+    #10
+
     A <= 14;   //14
     B <= -14;  //32
+    ALUResult_actual <= 32'b0;
+    ALUControl <= 5'b00111;  //set less than (14 < 32, result should be 32'b0)
     #10
 
     ALUControl <= 5'b01000;  //madd
