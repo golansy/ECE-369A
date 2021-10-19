@@ -11,7 +11,7 @@ module ALU32Bit_tb();
 
 	reg [4:0] ALUControl;   // control bits for ALU operation
 	reg [31:0] A, B;	        // inputs
-    reg [31:0] hi_read, lo_read;
+    reg [31:0] hi_in, lo_in;
     reg Clk;
 
     reg [31:0] hi_actual, lo_actual;
@@ -19,19 +19,19 @@ module ALU32Bit_tb();
 
 	wire [31:0] ALUResult;	// answer
 	wire Zero;	        // Zero=1 if ALUResult == 0
-    wire [31:0] hi_write, lo_write;
+    wire [31:0] hi_out, lo_out;
 
     ALU32Bit u0(
         .Clk(Clk),
         .ALUControl(ALUControl), 
         .A(A), 
         .B(B),
-        .hi_input(hi_read),
-        .lo_input(lo_read), 
+        .hi_input(hi_in),
+        .lo_input(lo_in), 
         .ALUResult(ALUResult), 
         .Zero(Zero),
-        .hi_output(hi_write),
-        .lo_output(lo_write)
+        .hi_output(hi_out),
+        .lo_output(lo_out)
     );
     
     initial begin
@@ -152,18 +152,81 @@ module ALU32Bit_tb();
     #10
 
     ALUControl <= 5'b01000;  //madd
-    A <= 32'b1000; //8
-    B <= 32'b1000; //8
+    hi_in <= 0;
+    lo_in <= 0;
+    A <= 8; //8
+    B <= 8; //8
+    hi_actual <= 32'b0;
+    lo_actual <= 32'b1000000;
     #10
-
+    
+    ALUControl <= 5'b01000;  //madd
+    hi_in <= 0;
+    lo_in <= 0;
+    A <= 2000000000;
+    B <= -2000000000;
+    hi_actual <= 32'b11001000011111010010010100110001;
+    lo_actual <= 32'b01100010011100000000000000000000;
+    #10
+    
+    ALUControl <= 5'b01000;  //madd
+    hi_in <= 32'b1;
+    lo_in <= 32'b100;
+    A <= 2000000000;
+    B <= -2000000000;
+    hi_actual <= 32'b11001000011111010010010100110010;
+    lo_actual <= 32'b01100010011100000000000000000100;
+    #10
+    
+    ALUControl <= 5'b01000;  //madd
+    hi_in <= 32'b1;
+    lo_in <= 32'b100;
+    A <= 2000000000;
+    B <= 2000000000;
+    hi_actual <= 32'b00110111100000101101101011001111;
+    lo_actual <= 32'b10011101100100000000000000000100;
+    #10
+    
     ALUControl <= 5'b01001;  //msub
-    A <= 32'b1000; //8
-    B <= 32'b1000; //8
+    hi_in <= 0;
+    lo_in <= 0;
+    A <= 8; //8
+    B <= 8; //8
+    hi_actual <= 32'b11111111111111111111111111111111;
+    lo_actual <= 32'b11111111111111111111111111000000;
+    #10
+    
+    ALUControl <= 5'b01001;  //msub
+    hi_in <= 0;
+    lo_in <= 0;
+    A <= 2000000000;
+    B <= -2000000000;
+    hi_actual <= 32'b00110111100000101101101011001110;
+    lo_actual <= 32'b10011101100100000000000000000000;
+    #10
+    
+    ALUControl <= 5'b01001;  //msub
+    hi_in <= 32'b1;
+    lo_in <= 32'b100;
+    A <= 2000000000;
+    B <= -2000000000;
+    hi_actual <= 32'b00110111100000101101101011001111;
+    lo_actual <= 32'b10011101100100000000000000000100;
+    #10
+    
+    ALUControl <= 5'b01001;  //msub
+    hi_in <= 32'b1;
+    lo_in <= 32'b100;
+    A <= 2000000000;
+    B <= 2000000000;
+    hi_actual <= 32'b11001000011111010010010100110010;
+    lo_actual <= 32'b01100010011100000000000000000100;
     #10
 
     ALUControl <= 5'b01010;  //lui
-    A <= 32'b0; //unused
-    B <= 32'b1111111111111111;
+    A <= 32'b1; //unused
+    B <= 32'b1111110111111111;
+    ALUResult_actual <= 32'b11111101111111110000000000000000;
     #10
 
     ALUControl <= 5'b01011; //mthi

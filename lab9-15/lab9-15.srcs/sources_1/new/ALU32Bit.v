@@ -76,13 +76,13 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                     ALUResult = 1'b0;
             end
             5'b01000 : begin //madd 
-                temp = A * B;
+                temp = $signed(A) * $signed(B);
                 temp = {hi_input, lo_input} + temp; 
                 hi_output = temp[63:32];
                 lo_output = temp[31:0];    
             end
             5'b01001 : begin //msub  
-                temp = A * B;
+                temp = $signed(A) * $signed(B);
                 temp = {hi_input, lo_input} - temp; 
                 hi_output = temp[63:32];
                 lo_output = temp[31:0];
