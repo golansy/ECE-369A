@@ -41,7 +41,7 @@ module ALU32Bit(ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_output
  	
     integer i, flag;
     
-    always @ B begin
+    always @ ALUControl begin
         ALUResult = 0;
         case (ALUControl) 
             5'b00000 : begin //AND

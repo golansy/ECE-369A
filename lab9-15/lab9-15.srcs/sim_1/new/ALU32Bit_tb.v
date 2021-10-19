@@ -13,6 +13,9 @@ module ALU32Bit_tb();
 	reg [31:0] A, B;	        // inputs
     reg [31:0] hi_read, lo_read;
 
+    reg [31:0] hi_actual, lo_actual;
+    reg [31:0] ALUResult_actual;
+
 	wire [31:0] ALUResult;	// answer
 	wire Zero;	        // Zero=1 if ALUResult == 0
     wire [31:0] hi_write, lo_write;
@@ -31,15 +34,17 @@ module ALU32Bit_tb();
 
 	initial begin
     
-    #10;
-    ALUControl <= 5'b00000;  //and (result should be 32'b1000)
+    #10
     A <= 32'b1010; //10
     B <= 32'b1001; //9
-    #10;
+    ALUResult_actual <= 32'b10000;
+    ALUControl <= 5'b00000;  //and (result should be 32'b1000)
+    #10
     
-    ALUControl <= 5'b00001;  //or (result should be 32'b11111111)
     A <= 32'b11101001;
     B <= 32'b01010111;
+    ALUResult_actual <= 32'b11111111;
+    ALUControl <= 5'b00001;  //or (result should be 32'b11111111)
     #10
 
     ALUControl <= 5'b00010;  //add (32 + 14 = 46)
