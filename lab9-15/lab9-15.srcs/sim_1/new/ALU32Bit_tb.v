@@ -230,34 +230,42 @@ module ALU32Bit_tb();
     #10
 
     ALUControl <= 5'b01011; //mthi
-    A <= 32'b1;
-    B <= 32'b0; //unused
+    A <= 3;
+    B <= 0; //unused
+    hi_actual <= 3;
+    lo_actual <= lo_out;
     #10
 
     ALUControl <= 5'b01100;  //NOR
     A <= 32'b0111000110;
     B <= 32'b0000110011;
+    ALUResult_actual <= 32'b1000001000;
     #10
 
     ALUControl <= 5'b01101;  //XOR
     A <= 32'b0111000110;
     B <= 32'b0000110011;
+    ALUResult_actual <= 32'b0111110101;
     #10  
 
     ALUControl <= 5'b01110;  //mtlo
-    A <= 32'b1;
-    B <= 32'b0; //unused
+    A <= 3;
+    B <= 0; //unused
+    hi_actual <= hi_out;
+    lo_actual <= 3;
     #10
 
     ALUControl <= 5'b01111;  //mfhi
+    hi_in <= 3;
+    lo_in <= 4;
+    ALUResult_actual <= 3;
     #10
 
     ALUControl <= 5'b10000;  //mflo
+    hi_in <= 4;
+    lo_in <= 3;
+    ALUResult_actual <= 3;
     #10
-
-    //skip testing 10001 and 10010 for now,
-    //implement later with signed 
-    //instructions???
 
     ALUControl <= 5'b10011;  //movn
     A <= 32'h3E8;

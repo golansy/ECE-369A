@@ -108,34 +108,28 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
             5'b10000 : begin //mflo
                 ALUResult = lo_input;
             end
-            5'b10001 : begin //add 16-bit for sh and lh
-                ALUResult = A[15:0] + B[15:0];
-            end
-            5'b10010 : begin //add 8-bit for lb and sb
-                ALUResult = A[7:0] + B[7:0];
-            end
-            5'b10011 : begin //pass A
+            5'b10001 : begin //pass A
                 ALUResult = A;
             end
-            5'b10100 : begin //sltu
+            5'b10010 : begin //sltu
                 if(A < B)
                     ALUResult = 1'b1;
                 else
                     ALUResult = 1'b0;
             end
-            5'b10101 : begin //rotr
+            5'b10011 : begin //rotr
                 ALUResult = (B >> A) | (B << ~A);
             end
-            5'b10110 : begin //sra
+            5'b10100 : begin //sra
                 ALUResult = B >>> A;
             end
-            5'b10111 : begin //seh
+            5'b10101 : begin //seh
                 ALUResult = {{16{B[15]}}, B[15:0]};
             end
-            5'b11000 : begin //seb
+            5'b10110 : begin //seb
                 ALUResult = {{24{B[7]}}, B[7:0]};
             end
-            5'b11001 : begin //multu
+            5'b10111 : begin //multu
                 temp = A * B;
                 hi_output = temp[63:32];
                 lo_output = temp[31:0];
