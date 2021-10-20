@@ -2,3 +2,7 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathaniel/Documents/_nrod9
 INFO: [VRFC 10-311] analyzing module ALU32Bit
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ALU32Bit_tb
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:317]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:322]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:327]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:332]

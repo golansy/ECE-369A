@@ -267,34 +267,101 @@ module ALU32Bit_tb();
     ALUResult_actual <= 3;
     #10
 
-    ALUControl <= 5'b10011;  //movn
+    ALUControl <= 5'b10001;  //pass A
     A <= 32'h3E8;
     B <= 32'b1;
     #10
 
-    ALUControl <= 5'b10011;  //movn but B==0
-    A <= 32'h3E7;
-    B <= 32'b0;
+    A <= 32; //32
+    B <= 14;  //14
+    ALUResult_actual <= 32'b0;
+    ALUControl <= 5'b10010;  //stlu
     #10
 
-    ALUControl <= 5'b10100;  //movz
-    A <= 32'h3E6;
-    B <= 32'b0;
+    A <= 14;   //14
+    B <= 32;  //32
+    ALUResult_actual <= 32'b1;
+    ALUControl <= 5'b10010;  //stlu
+    #10
+    
+    A <= 14;   //14
+    B <= 14;  //32
+    ALUResult_actual <= 32'b0;
+    ALUControl <= 5'b10010;  //stlu
     #10
 
-    ALUControl <= 5'b10100;  //movz but B!=0
-    A <= 32'h3E6;
-    B <= 32'b1;
+    A <= 14;   //14
+    B <= -14;  //32
+    ALUResult_actual <= 32'b1;
+    ALUControl <= 5'b10010;  //stlu
     #10
 
-    ALUControl <= 5'b10101;  //rotrv and rotr
-    A <= 32'b10;
-    B <= 32'b10010111;
+    ALUControl <= 5'b10011;  //rotr
+    A <= 5;
+    B <= 32'b01000000000000000000000100110011;
+    ALUResult_actual <= 32'b10011010000000000000000000001001;
     #10
 
-    ALUControl <= 5'b10110;  //sra
-    A <= 32'b10;
-    B <= 32'b110001001;
+    ALUControl <= 5'b10100;  //sra
+    A <= 4;
+    B <= 32'b10101;
+    ALUResult_actual <= 32'b1;
+
+    ALUControl <= 5'b10100;  //sra
+    A <= 4;
+    B <= -1;
+    ALUResult_actual <= -1;
+
+    ALUControl <= 5'b10101;  //seh
+    A <= -1;
+    B <= {{16{1'b0}}, 1, {15{1'b0}}};
+    ALUResult_actual <= {{17{1'b1}}, {15{1'b0}}};
+
+    ALUControl <= 5'b10101;  //seh
+    A <= -1;
+    B <= {{16{1'b1}}, {15{1'b0}}, 1};
+    ALUResult_actual <= 1;
+
+    ALUControl <= 5'b10110;  //seb
+    A <= -1;
+    B <= {{24{1'b0}}, 1, {7{1'b0}}};
+    ALUResult_actual <= {{25{1'b1}}, {7{1'b0}}};
+
+    ALUControl <= 5'b10110;  //seb
+    A <= -1;
+    B <= {{24{1'b1}}, {7{1'b0}}, 1};
+    ALUResult_actual <= 1;
+
+    A <= 8;
+    B <= 8;
+    ALUResult_actual <= 64;
+    hi_actual <= 32'b0;
+    lo_actual <= 32'b01000000;
+    ALUControl <= 5'b00101;  //multu
+    #10
+    
+    A <= 2000000000;
+    B <= 2000000000;
+    ALUResult_actual <= 32'b10011101100100000000000000000000;
+    hi_actual <= 32'b00110111100000101101101011001110;
+    lo_actual <= 32'b10011101100100000000000000000000;
+    ALUControl <= 5'b00101;  //multu
+    #10
+    
+    A <= 8;
+    B <= -8;
+    ALUResult_actual <= 32'b01000110010100110110000000000000;
+    hi_actual <= 32'b01110111001101011001001111111100;
+    lo_actual <= 32'b01000110010100110110000000000000;
+    ALUControl <= 5'b00101;  //multu
+    
+    /*A <= 2000000000;
+    B <= -2000000000;
+    ALUResult_actual <= 32'b01100010011100000000000000000000;
+    hi_actual <= 32'b11001000011111010010010100110001;
+    lo_actual <= 32'b01100010011100000000000000000000;
+    ALUControl <= 5'b00101;  //multiply (result should be 1,651,507,200)
+    #10*/
 
 	end
 
