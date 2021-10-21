@@ -11,3 +11,10 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source ALU32Bit_tb.tcl
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Shifter.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Shifter.v
+update_compile_order -fileset sources_1
+close_sim
