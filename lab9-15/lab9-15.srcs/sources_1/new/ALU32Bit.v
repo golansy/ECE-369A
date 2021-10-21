@@ -42,7 +42,7 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
  	
     integer i, flag;
     
-    always @ (posedge Clk) begin
+    always @ (ALUControl or A or B or hi_input or lo_input) begin
         ALUResult = 0;
         case (ALUControl) 
             5'b00000 : begin //AND
