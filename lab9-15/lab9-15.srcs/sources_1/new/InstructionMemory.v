@@ -460,7 +460,7 @@ module InstructionMemory(Address, Instruction);
         end
         
         always @ * begin
-            Instruction <= memory[Address[8:2]];    
+            Instruction <= memory[Address[10:2]];    
         end
          
     endmodule

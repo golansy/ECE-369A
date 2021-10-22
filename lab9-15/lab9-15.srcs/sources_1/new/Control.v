@@ -90,7 +90,7 @@ always @(*) begin
                     ZeroExt <= 0; //X
                     ALUSrcB <= 0;
                     ALUSrcA <= 0;
-                    ALUOP <= 5'b00001; //sub
+                    ALUOp <= 5'b00001; //sub
                     RegDst <= 1;
                     Branch <= 0;
                     MemWriteW <= 0;
