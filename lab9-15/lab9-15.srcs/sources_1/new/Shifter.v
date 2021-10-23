@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/16/2021 09:06:48 PM
+// Create Date: 10/21/2021 02:52:28 PM
 // Design Name: 
-// Module Name: Adder
+// Module Name: Shifter
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Adder(A, B, Result);
-    input [31:0] A, B;
+module Shifter(A, Shamt, Result);
+    input [31:0] A, Shamt;
     output reg [31:0] Result;
-
-    always @ (A or B) begin
-        Result =  A + B;
+    
+    always @ (A or Shamt) begin
+        Result = A << Shamt;
     end
-
 endmodule

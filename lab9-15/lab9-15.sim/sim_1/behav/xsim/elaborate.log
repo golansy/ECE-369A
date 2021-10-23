@@ -4,6 +4,10 @@ Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 9a12db2147
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:317]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:322]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:327]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v:332]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis

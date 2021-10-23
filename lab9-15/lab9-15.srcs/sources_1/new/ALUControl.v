@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/16/2021 09:06:48 PM
+// Create Date: 10/21/2021 03:01:46 PM
 // Design Name: 
-// Module Name: Adder
+// Module Name: ALUControl
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Adder(A, B, Result);
-    input [31:0] A, B;
-    output reg [31:0] Result;
-
-    always @ (A or B) begin
-        Result =  A + B;
+module ALUControl(ALUOp, RegWrite_in, Funct, ALUCntrl, RegWrite_out);
+    input [5:0] Funct, ALUOp;
+    input RegWrite_in;
+    output reg RegWrite_out;
+    output reg [5:0] ALUCntrl;
+    
+    always @ (ALUOp or RegWrite_in or Funct) begin
+        
     end
-
 endmodule
