@@ -2,18 +2,12 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Fri Oct 22 02:42:13 2021
-# Process ID: 16860
-# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1796 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
-# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/vivado.log
-# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15\vivado.jou
+# Start of session at: Mon Oct 25 08:12:28 2021
+# Process ID: 22976
+# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9096 C:\Users\rodri\Documents\nrod968\School\2021_Fall\ECE-369A\lab9-15\lab9-15.xpr
+# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/vivado.log
+# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15\vivado.jou
 #-----------------------------------------------------------
-start_gui
-open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
-update_compile_order -fileset sources_1
-add_files -norecurse {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Control.v C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/InstructionMemory.v}
-update_compile_order -fileset sources_1
-close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v w ]
-add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v
+sstart_guiopen_project C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.xpr
 update_compile_order -fileset sources_1
