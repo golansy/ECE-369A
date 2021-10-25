@@ -557,7 +557,6 @@ always @(Instruction) begin
                 ZeroExt = 0; //X
                 ALUSrcB = 0;
                 ALUSrcA = 0;
-                ALUOp = 5'b01000; //madd
                 RegDst = 0; //X
                 Branch = 0;
                 MemWrite = 2'b00;

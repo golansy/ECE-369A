@@ -14,9 +14,9 @@ module SignExtension(in, ZeroExt, out);
     /* A 32-Bit output word */
     output reg [31:0] out;
     
-    always @ * begin
-        if (ZeroExt == 0) out <= {{16{in[15]}}, in};
-        if (ZeroExt == 1) out <= {16'b0, in};
+    always @ (in or ZeroExt) begin
+        if (ZeroExt == 0) out = {{16{in[15]}}, in};
+        if (ZeroExt == 1) out = {16'b0, in};
     end
 
 endmodule

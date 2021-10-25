@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Sat Oct 16 21:04:51 2021
+# Process ID: 18396
+# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18928 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab1\lab1.xpr
+# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/vivado.log
+# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab1/lab1.xpr
+update_compile_order -fileset sources_1

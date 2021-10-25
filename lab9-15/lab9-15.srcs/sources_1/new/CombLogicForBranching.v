@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module CombLogicForBranching(Zero, beq, blez, bltz, msb, branch, PCSrc);
-    input Zero, beq, blez, bltz, msb, branch;
+module CombLogicForBranching(Zero, bne, bgez, bgtz, msb_rs, branch, PCSrc);
+    input Zero, bne, bgez, bgtz, msb_rs, branch;
     output reg PCSrc;
 
-    always @ * begin
-        PCSrc <= ( ( ( ( msb | Zero) ^ blez) | (beq ^ Zero) | (bltz ^ msb) ) & branch );
+    always @ (Zero or bne or bgez or bgtz or msb_rs or branch) begin
+        PCSrc = (((msb_rs | Zero) ^ bgtz) | (bne ^ Zero) | (bgez ^ msb_rs)) & branch;
     end
 
 endmodule
