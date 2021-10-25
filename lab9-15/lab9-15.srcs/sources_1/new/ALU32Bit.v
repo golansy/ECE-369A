@@ -135,6 +135,10 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                 lo_output = temp[31:0];
                 ALUResult = lo_output;
             end
+            5'b11000 : begin //mul
+                temp = $signed(A) * $signed(B);
+                ALUResult = temp[31:0];
+            end
             default: begin 
                 ALUResult = ALUResult;
             end

@@ -32,7 +32,7 @@ module EXMEMReg(Clk, Zero_in, RegWrite_in, Branch_in, MemWrite_in, MemRead_in, M
 
     always @ (posedge Clk) begin
         Zero_out <= Zero_in;
-        RegWrite_out <= RegWrite_in; 
+        RegWrite_out <= RegWrite_in;
         Branch_out <= Branch_in;
         MemWrite_out <= MemWrite_in;
         MemRead_out <=  MemRead_in;
