@@ -25,7 +25,8 @@ module CombLogicForBranching(Zero, bne, bgez, bgtz, msb_rs, branch, PCSrc);
     output reg PCSrc;
 
     always @ (Zero or bne or bgez or bgtz or msb_rs or branch) begin
-        PCSrc = (((msb_rs | Zero) ^ bgtz) | (bne ^ Zero) | (bgez ^ msb_rs)) & branch;
+        if (branch == 1) PCSrc = ((msb_rs | Zero) ^ bgtz) | (bne ^ Zero) | (bgez ^ msb_rs);
+        else PCSrc = 0;
     end
 
 endmodule
