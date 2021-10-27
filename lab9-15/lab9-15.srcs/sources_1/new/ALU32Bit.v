@@ -55,10 +55,10 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                 ALUResult = A + B;
             end
             5'b00011 : begin //shift left logical
-                ALUResult = B << A;
+                ALUResult = B << A[4:0];
             end
             5'b00100 : begin //shift right logical
-                ALUResult = B >> A;
+                ALUResult = B >> A[4:0];
             end
             5'b00101 : begin //mult
                 temp = $signed(A) * $signed(B);
@@ -118,10 +118,11 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                     ALUResult = 1'b0;
             end
             5'b10011 : begin //rotr
-                ALUResult = (B >> A) | (B << ~A);
+                ALUResult = (B >> A[4:0]) | (B << (32 - A[4:0]));
+//                ALUResult = {B[A[4:0]:0], B[31:A[4:0]]};
             end
             5'b10100 : begin //sra
-                ALUResult = B >>> A;
+                ALUResult = $signed(B) >>> A[4:0];
             end
             5'b10101 : begin //seh
                 ALUResult = {{16{B[15]}}, B[15:0]};
@@ -138,6 +139,9 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
             5'b11000 : begin //mul
                 temp = $signed(A) * $signed(B);
                 ALUResult = temp[31:0];
+            end
+            5'b11001 : begin //Add0
+                ALUResult = A + 32'b0;
             end
             default: begin 
                 ALUResult = ALUResult;

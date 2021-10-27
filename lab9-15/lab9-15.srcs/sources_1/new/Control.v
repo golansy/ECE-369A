@@ -19,18 +19,19 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module Control(Instruction, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Bgez, Bgtz, ALUOp);
+module Control(Instruction, PCSrc, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, ALUOp, Jump, Jr);
 input [31:0] Instruction;
+input PCSrc;
 reg [5:0] op, funct;
 reg [4:0] shamt;
 reg R_21; //used to distinguish rotr and srl, 21st bit
 reg R_6; //used to distinguish srlv and rotrv, 6th bit
 reg [4:0] bltz; //used to distinguish bltz and bgez, bits 20-16
-output reg RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemToReg, HiWrite, LoWrite, Bne, Bgez, Bgtz;
-output reg [1:0] MemWrite, MemRead;
+output reg RegWrite, ZeroExt, ALUSrcB, ALUSrcA, Branch, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, Jump, Jr;
+output reg [1:0] MemWrite, MemRead, RegDst, MemToReg;
 output reg [4:0] ALUOp;
 
-always @(Instruction) begin
+always @(Instruction or PCSrc) begin
     op = Instruction[31:26];
     funct = Instruction[5:0];
     shamt = Instruction[10:6];
@@ -42,7 +43,7 @@ always @(Instruction) begin
     ALUSrcB = 0;
     ALUSrcA = 0;
     ALUOp = 5'b00011;   //sll
-    RegDst = 0;
+    RegDst = 2'b0;
     Branch = 0;
     MemWrite = 2'b00;
     MemRead = 2'b00;
@@ -52,8 +53,20 @@ always @(Instruction) begin
     Bne = 0;
     Bgez = 0;
     Bgtz = 0;
+    Beq = 0;
+    Bltz = 0;
+    Blez = 0;
+    Jump = 0;
+    Jr = 0;
+    if (PCSrc == 1) begin
+        op = 6'b0;
+        funct = 6'b0;
+        shamt = 6'b0;
+        R_21 = 1'b0;
+        R_6 = 1'b0;
+        bltz = 5'b0;
+    end
     case (op) 
-        
        6'b000000: begin //R-Type
             ALUOp = 5'b11111;
             case (funct) 
@@ -105,28 +118,11 @@ always @(Instruction) begin
                     Bgez = 0; //X
                     Bgtz = 0; //X
                 end
-                6'b000010: begin  //mul
-                    RegWrite = 1;
-                    ZeroExt = 0; //X
-                    ALUSrcB = 0;
-                    ALUSrcA = 0;
-                    RegDst = 1;
-                    Branch = 0;
-                    MemWrite = 2'b00;
-                    MemRead = 2'b00; //X
-                    MemToReg = 1;
-                    HiWrite = 0;
-                    LoWrite = 0;
-                    Bne = 0;
-                    Bgez = 0;
-                    Bgtz = 0;
-                end
                 6'b001000: begin //jr  <------- FIX ME
                     RegWrite = 0;
                     ZeroExt = 0;
                     ALUSrcB = 0;
                     ALUSrcA = 0;
-                    //ALUOp = 
                     RegDst = 0;
                     Branch = 0;
                     MemWrite = 2'b00;
@@ -134,9 +130,8 @@ always @(Instruction) begin
                     MemToReg = 0;
                     HiWrite = 0;
                     LoWrite = 0;
-                    Bne = 0;
-                    Bgez = 0;
-                    Bgtz = 0;
+                    Jump = 1;
+                    Jr = 1;
                 end
                 6'b100100: begin //and
                     RegWrite = 1;
@@ -568,6 +563,22 @@ always @(Instruction) begin
                 Bgez = 0; //X
                 Bgtz = 0; //X
             end
+            6'b000010: begin  //mul
+                    RegWrite = 1;
+                    ZeroExt = 0; //X
+                    ALUSrcB = 0;
+                    ALUSrcA = 0;
+                    RegDst = 1;
+                    Branch = 0;
+                    MemWrite = 2'b00;
+                    MemRead = 2'b00; //X
+                    MemToReg = 1;
+                    HiWrite = 0;
+                    LoWrite = 0;
+                    Bne = 0;
+                    Bgez = 0;
+                    Bgtz = 0;
+            end
             6'b000100 : begin //msub
                 RegWrite = 0;
                 ZeroExt = 0; //X
@@ -607,7 +618,7 @@ always @(Instruction) begin
 
     6'b001001 : begin //addiu
         RegWrite = 1;
-        ZeroExt = 1;
+        ZeroExt = 0;
         ALUSrcB = 1;
         ALUSrcA = 0;
         ALUOp = 5'b00010; //add
@@ -623,9 +634,37 @@ always @(Instruction) begin
         Bgtz = 0; //X     
     end
     
-//   6'b001101: begin
-
-//    end
+    6'b000010: begin //j
+        RegWrite = 0;
+        ZeroExt = 0;
+        ALUSrcA = 0;
+        ALUSrcB = 0;
+        ALUOp = 5'b0;
+        RegDst = 0;
+        Branch = 0;
+        MemWrite = 0;
+        MemRead = 0;
+        HiWrite = 0;
+        LoWrite = 0;
+        Jump = 1;
+        Jr = 0;
+    end
+    6'b000011: begin //jal
+        RegWrite = 1;
+        ZeroExt = 0;
+        ALUSrcA = 0;
+        ALUSrcB = 0;
+        ALUOp = 5'b0;
+        RegDst = 2;
+        Branch = 0;
+        MemWrite = 0;
+        MemRead = 0;
+        MemToReg = 2;
+        HiWrite = 0;
+        LoWrite = 0;
+        Jump = 1;
+        Jr = 0;
+    end
     
     6'b100011: begin //lw
         RegWrite = 1;
@@ -766,9 +805,7 @@ always @(Instruction) begin
         MemToReg = 0; //X
         HiWrite = 0;
         LoWrite = 0;
-        Bne = 0; 
-        Bgez = 0; //X
-        Bgtz = 0; //X           
+        Beq = 1;
     end
 
     6'b000001 : begin //bgez or bltz? -> use bltz
@@ -778,7 +815,7 @@ always @(Instruction) begin
                 ZeroExt = 0; 
                 ALUSrcB = 0;
                 ALUSrcA = 0;
-                //ALUOp = 5'b; X
+                ALUOp = 5'b11001; //add0
                 RegDst = 0; //X
                 Branch = 1;
                 MemWrite = 2'b00;
@@ -786,16 +823,14 @@ always @(Instruction) begin
                 MemToReg = 0; //X
                 HiWrite = 0;
                 LoWrite = 0;
-                Bne = 0; //X
-                Bgez = 0; 
-                Bgtz = 0; //X                        
+                Bltz = 1;                      
             end
             5'b00001 : begin //bgez
                 RegWrite = 0;
                 ZeroExt = 0; 
                 ALUSrcB = 0;
                 ALUSrcA = 0;
-                //ALUOp = 5'b; X
+                ALUOp = 5'b11001; //add0
                 RegDst = 0; //X
                 Branch = 1;
                 MemWrite = 2'b00;
@@ -803,9 +838,7 @@ always @(Instruction) begin
                 MemToReg = 0; //X
                 HiWrite = 0;
                 LoWrite = 0;
-                Bne = 0; //X
                 Bgez = 1; 
-                Bgtz = 0; //X
             end           
         endcase
     end
@@ -823,9 +856,7 @@ always @(Instruction) begin
         MemToReg = 0; //X
         HiWrite = 0;
         LoWrite = 0;
-        Bne = 1; 
-        Bgez = 0; //X 
-        Bgtz = 0; //X     
+        Bne = 1;    
     end
 
     6'b000111 : begin //bgtz
@@ -833,7 +864,7 @@ always @(Instruction) begin
         ZeroExt = 0; 
         ALUSrcB = 0;
         ALUSrcA = 0;
-        ALUOp = 5'b00010; //add
+        ALUOp = 5'b11001; //add0
         RegDst = 0; //X
         Branch = 1;
         MemWrite = 2'b00;
@@ -841,8 +872,6 @@ always @(Instruction) begin
         MemToReg = 0; //X
         HiWrite = 0;
         LoWrite = 0;
-        Bne = 0; //X 
-        Bgez = 0; //X 
         Bgtz = 1;          
     end
 
@@ -851,7 +880,7 @@ always @(Instruction) begin
         ZeroExt = 0; 
         ALUSrcB = 0;
         ALUSrcA = 0;
-        ALUOp = 5'b00010; //add
+        ALUOp = 5'b11001; //add0
         RegDst = 0; //X
         Branch = 1;
         MemWrite = 2'b00;
@@ -859,9 +888,7 @@ always @(Instruction) begin
         MemToReg = 0; //X
         HiWrite = 0;
         LoWrite = 0;
-        Bne = 0; //X 
-        Bgez = 0; //X 
-        Bgtz = 0;             
+        Blez = 1;         
     end
 
     6'b001100 : begin //andi
@@ -869,7 +896,7 @@ always @(Instruction) begin
         ZeroExt = 0; 
         ALUSrcB = 1;
         ALUSrcA = 0;
-        ALUOp = 5'b00000; //and
+        ALUOp = 5'b00000; //sub
         RegDst = 0; 
         Branch = 0;
         MemWrite = 2'b00;
@@ -938,7 +965,7 @@ always @(Instruction) begin
 
     6'b001011 : begin //sltiu
         RegWrite = 1;
-        ZeroExt = 1; 
+        ZeroExt = 0; 
         ALUSrcB = 1;
         ALUSrcA = 0;
         ALUOp = 5'b10010; //sltu
@@ -955,7 +982,6 @@ always @(Instruction) begin
     end
           
     endcase
-
 end
 
 endmodule

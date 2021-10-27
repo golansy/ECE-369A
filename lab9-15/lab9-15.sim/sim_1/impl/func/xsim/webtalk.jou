@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Wed Oct 27 15:04:46 2021
+# Process ID: 8524
+# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/impl/func/xsim
+# Command line: wbtcv.exe -mode batch -source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/impl/func/xsim/xsim.dir/Datapath_tb_func_impl/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/impl/func/xsim/webtalk.log
+# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/impl/func/xsim\webtalk.jou
+#-----------------------------------------------------------
+source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/impl/func/xsim/xsim.dir/Datapath_tb_func_impl/webtalk/xsim_webtalk.tcl -notrace

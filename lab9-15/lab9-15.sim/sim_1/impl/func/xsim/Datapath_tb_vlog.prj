@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"Datapath_tb_func_impl.v" \
+"../../../../../lab9-15.srcs/sim_1/new/ALU32Bit_tb.v" \
+"../../../../../lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v" \
+"../../../../../lab9-15.srcs/sim_1/new/DataMemory_tb.v" \
+"../../../../../lab9-15.srcs/sim_1/new/SignExtension_tb.v" \
+"../../../../../lab9-15.srcs/sim_1/new/RegisterFile_tb.v" \
+"../../../../../lab9-15.srcs/sim_1/new/Datapath_tb.v" \
+
+# Do not sort compile order
+nosort

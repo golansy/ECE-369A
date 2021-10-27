@@ -20,28 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IFIDReg(Clk, Reset, PC_in, IM_in, PC_out, IM_out);
+module IFIDReg(Clk, Reset, PC_in, IM_in, PC_out, IM_out, PC_Plus4_out);
     input Clk, Reset;
     input [31:0] PC_in, IM_in;
-    output reg [31:0] PC_out, IM_out;
-    reg [31:0] PC, IM;
+    output reg [31:0] PC_out, IM_out, PC_Plus4_out;
     
-    always @ (posedge Clk or posedge Reset) begin
+    always @ (posedge Clk) begin
         if (Reset == 1) begin
             PC_out <= 0;
             IM_out <= 0;
-            PC <= 0;
-            IM <= 0;
+            PC_Plus4_out <= 0;
         end
         else begin
-            PC_out <= PC;
-            IM_out <= IM;
+            PC_out <= PC_in;
+            IM_out <= IM_in;
+            PC_Plus4_out <= PC_in;
         end
     end
-    
-    always @ (negedge Clk) begin
-        PC <= PC_in;
-        IM <= IM_in;
-    end
-
 endmodule
