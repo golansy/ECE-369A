@@ -41,7 +41,7 @@ module IDEXReg(Clk, Reset, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branc
         if (Reset == 1) begin
             RegWrite_out <= 0; 
             ALUSrcB_out <= 0;
-            ALUSrcA_out <= 0;
+            ALUSrcA_out <= 1;
             RegDst_out <= 0;
             Branch_out <= 0;
             MemWrite_out <= 0;
@@ -63,7 +63,7 @@ module IDEXReg(Clk, Reset, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branc
             
             RegWrite <= 0; 
             ALUSrcB <= 0;
-            ALUSrcA <= 0;
+            ALUSrcA <= 1;
             RegDst <= 0;
             Branch <= 0;
             MemWrite <= 0;

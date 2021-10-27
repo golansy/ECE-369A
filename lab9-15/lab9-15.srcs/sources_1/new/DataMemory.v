@@ -45,6 +45,15 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
 
     output reg[31:0] ReadData; // Contents of memory location at Address
     reg [31:0] memory[0:1023];
+    
+    integer i;
+    initial begin
+    
+        for(i=0; i < 31; i = i + 1) begin
+            memory[i] <= 32'h0;
+        end   
+        
+    end
 
     always @(posedge Clk) begin
         case (MemRead)

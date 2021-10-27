@@ -57,10 +57,10 @@ module RegisterFile(ReadRegister1, ReadRegister2, WriteRegister, WriteData, RegW
 
 	reg [31:0] regFile [0:31];
 
-		integer i;
+	integer i;
     initial begin
     
-        for(i=0; i < 31; i = i + 1) begin
+        for(i=0; i < 32; i = i + 1) begin
             regFile[i] <= 32'h0;
         end   
         

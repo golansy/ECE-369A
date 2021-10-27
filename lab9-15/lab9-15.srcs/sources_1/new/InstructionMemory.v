@@ -27,7 +27,7 @@ module InstructionMemory(Address, Instruction);
     output reg [31:0] Instruction;    // Instruction at memory location Address
     
    //Create 2D array for memory with 128 32-bit elements here
-        (*mark_debug = "true"*) reg [31:0] memory [0:511];
+        (*mark_debug = "true"*) reg [31:0] memory [0:1023];
         
         
         initial begin                   //need to iniitalize this for the code!!!
