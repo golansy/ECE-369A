@@ -20,15 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module EXMEMReg(Clk, Reset, Zero_in, RegWrite_in, Branch_in, MemWrite_in, MemRead_in, MemToReg_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, PC_in, ALUResult_in, RegRead1_in, RegRead2_in, write_reg_in, PC_Plus4_in, JumpAddress_in, Zero_out, RegWrite_out, Branch_out, MemWrite_out, MemRead_out, MemToReg_out, Bne_out, Beq_out, Bgez_out, Bltz_out, Bgtz_out, Blez_out, ALUResult_out, PC_out, RegRead1_out, RegRead2_out, write_reg_out, PC_Plus4_out,JumpAddress_out);
+module EXMEMReg(Clk, Reset, Zero_in, RegWrite_in, Branch_in, MemWrite_in, MemRead_in, MemToReg_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, PC_in, ALUResult_in, RegRead1_in, RegRead2_in, write_reg_in, PC_Plus4_in, Jump_in, JumpAddress_in, Zero_out, RegWrite_out, Branch_out, MemWrite_out, MemRead_out, MemToReg_out, Bne_out, Beq_out, Bgez_out, Bltz_out, Bgtz_out, Blez_out, ALUResult_out, PC_out, RegRead1_out, RegRead2_out, write_reg_out, PC_Plus4_out, Jump_out, JumpAddress_out);
     input Clk, Reset, Zero_in;
-    input RegWrite_in, Branch_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in;
+    input RegWrite_in, Branch_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, Jump_in;
     input [31:0] PC_in, ALUResult_in, RegRead1_in, RegRead2_in, PC_Plus4_in, JumpAddress_in;
     input [4:0] write_reg_in;
     input [1:0] MemWrite_in, MemRead_in, MemToReg_in;
 
     output reg Zero_out, RegWrite_out, Branch_out, Bne_out, Beq_out, Bgez_out, Bltz_out, Bgtz_out, Blez_out;
-    output reg [31:0] ALUResult_out, PC_out, RegRead1_out, RegRead2_out, PC_Plus4_out, JumpAddress_out;
+    output reg [31:0] ALUResult_out, PC_out, RegRead1_out, RegRead2_out, PC_Plus4_out, Jump_out, JumpAddress_out;
     output reg [4:0] write_reg_out;
     output reg [1:0] MemWrite_out, MemRead_out, MemToReg_out;
 
@@ -53,6 +53,7 @@ module EXMEMReg(Clk, Reset, Zero_in, RegWrite_in, Branch_in, MemWrite_in, MemRea
             write_reg_out <= 0;
             JumpAddress_out <= 0;
             PC_Plus4_out <= 0;
+            Jump_out <= 0;
         end
         else begin
             Zero_out <= Zero_in;
@@ -74,6 +75,7 @@ module EXMEMReg(Clk, Reset, Zero_in, RegWrite_in, Branch_in, MemWrite_in, MemRea
             write_reg_out <= write_reg_in;
             JumpAddress_out <= JumpAddress_in;
             PC_Plus4_out <= PC_Plus4_in;
+            Jump_out <= Jump_in;
         end
     end
 endmodule

@@ -2,11 +2,11 @@
 # Webtalk v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Tue Oct 26 22:50:02 2021
-# Process ID: 15348
-# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim
-# Command line: wbtcv.exe -mode batch -source C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/Datapath_tb_behav/webtalk/xsim_webtalk.tcl -notrace
-# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/webtalk.log
-# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim\webtalk.jou
+# Start of session at: Wed Oct 27 23:29:18 2021
+# Process ID: 17496
+# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/Datapath_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
-source C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/Datapath_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+source C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.sim/sim_1/behav/xsim/xsim.dir/Datapath_tb_behav/webtalk/xsim_webtalk.tcl -notrace

@@ -46,14 +46,7 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
     output reg[31:0] ReadData; // Contents of memory location at Address
     reg [31:0] memory[0:1023];
     
-    integer i;
-    initial begin
-    
-        for(i=0; i < 1024; i = i + 1) begin
-            memory[i] <= 32'h0;
-        end   
-        
-    end
+    initial $readmemh("data_memory.mem", memory);
 
     always @(posedge Clk) begin
         case (MemWrite)
@@ -63,9 +56,6 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
             2'b10 : begin
                 if (Address[1] == 0) memory[Address[11:2]] <= (memory[Address[11:2]] & 32'hffff0000) | (WriteData[15:0] << (Address[1] * 16));
                 if (Address[1] == 1) memory[Address[11:2]] <= (memory[Address[11:2]] & 32'h0000ffff) | (WriteData[15:0] << (Address[1] * 16));
-//                memory[Address[11:2]] = memory[Address[11:2]] | (32'h0000ffff << (Address[1] * 16));
-//                memory[Address[11:2]] = memory[Address[11:2]] | (WriteData[15:0] << (Address[1] * 16));
-//                memory[Address[11:2]] <= (memory[Address[11:2]] | (32'h0000ffff << (Address[1] * 16))) & (WriteData << (Address[1] * 16));
             end
             2'b11 : begin
                 case (Address[1:0])
@@ -74,10 +64,6 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
                     2'b10 : memory[Address[11:2]] <= (memory[Address[11:2]] & 32'hff00ffff) | (WriteData[7:0] << (Address[1:0] * 8));
                     2'b11 : memory[Address[11:2]] <= (memory[Address[11:2]] & 32'h00ffffff) | (WriteData[7:0] << (Address[1:0] * 8));
                 endcase
-//                memory[Address[11:2]] = memory[Address[11:2]] | (WriteData[7:0] << (Address[1:0] * 8));
-//                memory[Address[11:2]] = memory[Address[11:2]] | (32'h000000ff << (Address[1:0] * 8));
-//                memory[Address[11:2]] = memory[Address[11:2]] & (WriteData << (Address[1:0] * 8));
-//                memory[Address[11:2]] <= (memory[Address[11:2]] | (32'h000000ff << (Address[1:0] * 8))) & (WriteData << (Address[1:0] * 8));
             end
         endcase
     end
@@ -91,21 +77,14 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
                 ReadData = memory[Address[11:2]];  //word 
             end
             2'b10 : begin    //halfword
-//                ReadData = memory[Address[11:2]];
                 if (Address[1] == 1) ReadData <= {{16{memory[Address[11:2]][31]}}, (memory[Address[11:2]][31:16])};
                 if (Address[1] == 0) ReadData <= {{16{memory[Address[11:2]][15]}}, (memory[Address[11:2]][15:0])};
-//                ReadData = {{16{1'b0}}, ReadData[Address[1] * 16 +: 15]};
-//                ReadData = {{16{ReadData[15]}}, ReadData[15:0]};
-//                ReadData <= {{16{({{16{1'b0}}, ((memory[Address[11:2]])[Address[1] * 16 +: 15]})[15]}}, ({{16{1'b0}}, (memory[Address[11:2]])[Address[1] * 16 +: 15]})[15:0])};
             end
             2'b11 : begin   //byte
                 if (Address[1:0] == 0) ReadData <= {{24{memory[Address[11:2]][7]}}, (memory[Address[11:2]][7:0])};
                 if (Address[1:0] == 1) ReadData <= {{24{memory[Address[11:2]][15]}}, (memory[Address[11:2]][15:8])};
                 if (Address[1:0] == 2) ReadData <= {{24{memory[Address[11:2]][23]}}, (memory[Address[11:2]][23:16])};
                 if (Address[1:0] == 3) ReadData <= {{24{memory[Address[11:2]][31]}}, (memory[Address[11:2]][31:24])};
-//                ReadData = memory[Address[11:2]];
-//                ReadData = {{24{1'b0}}, ReadData[Address[1:0] * 8 +: 7]};
-//                ReadData = {{24{ReadData[7]}}, ReadData[7:0]};
             end
         endcase
     end

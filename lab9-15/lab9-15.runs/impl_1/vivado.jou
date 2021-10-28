@@ -2,8 +2,8 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Wed Oct 27 15:02:12 2021
-# Process ID: 21388
+# Start of session at: Thu Oct 28 02:24:01 2021
+# Process ID: 6744
 # Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/impl_1
 # Command line: vivado.exe -log Datapath.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source Datapath.tcl -notrace
 # Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/impl_1/Datapath.vdi

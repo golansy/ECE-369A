@@ -10,6 +10,10 @@
 // Target Devices: 
 // Tool Versions: 
 // Description: 
+// Participation: 
+//  Nathaniel Rodriguez - 50%
+//  Carson Haze - 50%
+//  Casey Way - 0%
 // 
 // Dependencies: 
 // 
