@@ -24,14 +24,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Datapath(Clk, Reset);
+module Datapath(Clk, Reset, Program_Counter, WriteData, hi_output, lo_output);
     input Clk, Reset;
     wire [31:0] PCAddress, PCAddress_ID, PCAddress_EX, PCAddress_shift, PCAddress_MEM;
-    (* MARK_DEBUG = "TRUE" *) wire [31:0] Program_Counter;
+    /*(* MARK_DEBUG = "TRUE" *)*/output wire [31:0] Program_Counter;
     wire [31:0] PCPlus4, PCPlus4_ID, PCPlus4_EX, PCPlus4_MEM, PCPlus8, PCPlus8_WB;
     wire [31:0] Instruction, Instruction_ID;
     wire [4:0] WriteReg_EX, WriteReg_MEM, WriteReg_WB;
-    (* MARK_DEBUG = "TRUE" *) wire [31:0] WriteData;
+    /*(* MARK_DEBUG = "TRUE" *)*/output wire [31:0] WriteData;
     wire [31:0] rs, rt, rs_EX, rt_EX, rs_MEM, rt_MEM;
     wire RegWrite, RegWrite_EX, RegWrite_control, RegWrite_MEM, RegWrite_WB;
     wire ALUSrcB, ALUSrcB_EX;
@@ -58,7 +58,7 @@ module Datapath(Clk, Reset);
     wire [31:0] shift2_out;
     wire [4:0] ALUCntrl;
     wire [31:0] ALU_A, ALU_B;
-    (* MARK_DEBUG = "TRUE" *) wire [31:0] hi_output, lo_output;
+    /*(* MARK_DEBUG = "TRUE" *)*/output wire [31:0] hi_output, lo_output;
     wire [31:0] hi_input, lo_input;
     wire [31:0] ALUResult, ALUResult_MEM, ALUResult_WB;
     wire [31:0] ReadData, ReadData_WB;

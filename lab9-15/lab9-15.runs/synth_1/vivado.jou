@@ -2,11 +2,11 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Thu Oct 28 02:23:24 2021
-# Process ID: 4640
-# Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/synth_1
+# Start of session at: Thu Oct 28 10:31:14 2021
+# Process ID: 18392
+# Current directory: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.runs/synth_1
 # Command line: vivado.exe -log Datapath.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Datapath.tcl
-# Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/synth_1/Datapath.vds
-# Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/synth_1\vivado.jou
+# Log file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.runs/synth_1/Datapath.vds
+# Journal file: C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source Datapath.tcl -notrace

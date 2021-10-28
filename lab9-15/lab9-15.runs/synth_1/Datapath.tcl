@@ -17,44 +17,43 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param chipscope.maxJobs 4
-set_msg_config -id {Common 17-41} -limit 10000000
+set_param chipscope.maxJobs 2
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.cache/wt [current_project]
-set_property parent.project_path C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.cache/wt [current_project]
+set_property parent.project_path C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo c:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.cache/ip [current_project]
+set_property ip_output_repo c:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_mem {
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/instruction_memory_jump.mem
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/instruction_memory_branch.mem
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/instruction_memory.mem
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/data_memory.mem
 }
 read_verilog -library xil_defaultlib {
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALU32Bit.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALUControl.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Adder.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Control.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/DataMemory.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/EXMEMReg.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HiLoRegisters.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IDEXReg.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IFIDReg.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/MEMWBReg.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit2To1.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit4To1.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ProgramCounter.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/RegisterFile.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Shifter.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/SignExtension.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/InstructionMemory.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/CombLogicForBranching.v
-  C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/PCAdder.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALU32Bit.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ALUControl.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Adder.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Control.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/DataMemory.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/EXMEMReg.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HiLoRegisters.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IDEXReg.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IFIDReg.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/MEMWBReg.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit2To1.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux32Bit4To1.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/ProgramCounter.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/RegisterFile.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Shifter.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/SignExtension.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/InstructionMemory.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/CombLogicForBranching.v
+  C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/PCAdder.v
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

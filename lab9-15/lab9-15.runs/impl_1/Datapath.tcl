@@ -60,21 +60,20 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param chipscope.maxJobs 4
+  set_param chipscope.maxJobs 2
   create_project -in_memory -part xc7a100tcsg324-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.cache/wt [current_project]
-  set_property parent.project_path C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr [current_project]
-  set_property ip_output_repo C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.cache/ip [current_project]
+  set_property webtalk.parent_dir C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.cache/wt [current_project]
+  set_property parent.project_path C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.xpr [current_project]
+  set_property ip_output_repo C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
-  add_files -quiet C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.runs/synth_1/Datapath.dcp
+  add_files -quiet C:/Users/rodri/Documents/nrod968/School/2021_Fall/ECE-369A/lab9-15/lab9-15.runs/synth_1/Datapath.dcp
   link_design -top Datapath -part xc7a100tcsg324-1
   close_msg_db -file init_design.pb
 } RESULT]
