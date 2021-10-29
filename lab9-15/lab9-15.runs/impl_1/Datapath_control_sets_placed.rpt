@@ -1,12 +1,12 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
---------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-| Date         : Thu Oct 28 10:34:20 2021
-| Host         : DESKTOP-OJEOEP6 running 64-bit major release  (build 9200)
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+| Date         : Thu Oct 28 17:53:37 2021
+| Host         : DESKTOP-0LK8LBG running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Datapath_control_sets_placed.rpt
 | Design       : Datapath
 | Device       : xc7a100t
---------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 Control Set Information
 
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |     7 |
-|    Minimum number of control sets                        |     7 |
+| Total control sets                                       |     9 |
+|    Minimum number of control sets                        |     9 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    13 |
+| Unused register locations in slices containing registers |    21 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,7 +39,7 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |     7 |
+| Total control sets |     9 |
 | >= 0 to < 4        |     1 |
 | >= 4 to < 6        |     0 |
 | >= 6 to < 8        |     0 |
@@ -47,7 +47,7 @@ Table of Contents
 | >= 10 to < 12      |     1 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |     5 |
+| >= 16              |     7 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,10 +58,10 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             203 |           95 |
-| No           | No                    | Yes                    |              31 |           13 |
-| No           | Yes                   | No                     |             353 |          105 |
-| Yes          | No                    | No                     |              64 |           38 |
+| No           | No                    | No                     |             160 |           82 |
+| No           | No                    | Yes                    |              31 |           11 |
+| No           | Yes                   | No                     |             380 |          111 |
+| Yes          | No                    | No                     |              64 |           35 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
@@ -74,12 +74,14 @@ Table of Contents
 |        Clock Signal       | Enable Signal | Set/Reset Signal | Slice Load Count | Bel Load Count |
 +---------------------------+---------------+------------------+------------------+----------------+
 |  ex_mem/Branch_out_reg_0  |               |                  |                1 |              1 |
-|  id_ex/ALUOp_out_reg[0]_0 |               |                  |                6 |             10 |
-|  n_0_1056_BUFG            |               |                  |               19 |             32 |
-|  n_1_1057_BUFG            |               |                  |               19 |             32 |
-|  Clk_IBUF_BUFG            | id_ex/E[0]    |                  |               38 |             64 |
-|  Clk_IBUF_BUFG            |               |                  |               50 |            128 |
-|  Clk_IBUF_BUFG            |               | Reset_IBUF       |              118 |            384 |
+|  id_ex/ALUOp_out_reg[0]_0 |               |                  |                4 |             11 |
+|  Clk_IBUF_BUFG            |               |                  |                5 |             20 |
+|  Clk_IBUF_BUFG            |               | Reset_IBUF       |                6 |             27 |
+|  n_0_1119_BUFG            |               |                  |               16 |             32 |
+|  n_1_1120_BUFG            |               |                  |               18 |             32 |
+|  ClkDivOut_BUFG           |               |                  |               38 |             64 |
+|  ClkDivOut_BUFG           | id_ex/E[0]    |                  |               35 |             64 |
+|  ClkDivOut_BUFG           |               | Reset_IBUF       |              116 |            384 |
 +---------------------------+---------------+------------------+------------------+----------------+
 
 
