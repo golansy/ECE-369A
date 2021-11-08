@@ -12,7 +12,7 @@
 // Description: 
 // Participation: 
 //  Nathaniel Rodriguez - 50%
-//  Carson Haze - 50%
+//  Carson Hayes - 50%
 //  Casey Way - 0%
 // 
 // Dependencies: 
