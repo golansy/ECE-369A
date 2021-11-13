@@ -32,7 +32,7 @@ module IDEXReg(Clk, Reset, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branc
     output reg [4:0] ALUOp_out, Instruction10_6_out, Instruction20_16_out, Instruction15_11_out;
     output reg [1:0] MemWrite_out, MemRead_out, MemToReg_out, RegDst_out;
 
-    always @ (posedge Clk) begin
+    always @ (posedge Clk, posedge Reset) begin
         if (Reset == 1) begin
             RegWrite_out <= 0; 
             ALUSrcB_out <= 0;

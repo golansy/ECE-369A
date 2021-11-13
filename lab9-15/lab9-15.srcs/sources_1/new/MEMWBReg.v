@@ -32,7 +32,7 @@ module MEMWBReg(Clk, Reset, RegWrite_in, MemToReg_in, ALUResult_in, ReadMem_in, 
     output reg [4:0] write_reg_out;
     output reg [1:0] MemToReg_out;
 
-    always @ (posedge Clk) begin
+    always @ (posedge Clk, posedge Reset) begin
         if (Reset == 1) begin
             RegWrite_out <= 0;
             MemToReg_out <= 0;
