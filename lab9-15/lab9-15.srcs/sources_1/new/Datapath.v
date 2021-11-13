@@ -64,7 +64,7 @@ module Datapath(Clk, Reset, out7, en_out);
     wire [31:0] ReadData, ReadData_WB;
     wire [31:0] JumpAddress, Jr_Mux_out, JumpAddress_MEM;
     wire [31:0] JumpMux_out;
-    wire [27:0] ShiftedAddress;
+    wire [31:0] ShiftedAddress;
     wire Zero, Zero_MEM;
     wire PCSrc;
     wire ClkDivOut;
@@ -82,7 +82,8 @@ module Datapath(Clk, Reset, out7, en_out);
     RegisterFile reg_file(Instruction_ID[25:21], Instruction_ID[20:16], WriteReg_WB, WriteData, RegWrite_WB, ClkDivOut, rs, rt);
     Control control(Instruction_ID, PCSrc, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, ALUOp, Jump, Jr);
     SignExtension sign_ext(Instruction_ID[15:0], ZeroExt, Immediate);
-    IDEXReg id_ex(ClkDivOut, Reset, RegWrite, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, PCAddress_ID, rs, rt, Immediate, ALUOp, Instruction_ID[10:6], Instruction_ID[20:16], Instruction_ID[15:11], PCPlus4_ID, Jr, Jump, {PCPlus4_ID[31:28], (Instruction_ID[25:0] << 2), 2'b0}, RegWrite_EX, ALUSrcB_EX, ALUSrcA_EX, RegDst_EX, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, HiWrite_EX, LoWrite_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_EX, rs_EX, rt_EX, Immediate_EX, ALUOp_EX, shamt_EX, rt_reg_EX, rd_reg_EX, PCPlus4_EX, Jr_EX, Jump_EX, JumpAddress);
+    Shifter shift2_1(Instruction_ID, 2, ShiftedAddress);
+    IDEXReg id_ex(ClkDivOut, Reset, RegWrite, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, PCAddress_ID, rs, rt, Immediate, ALUOp, Instruction_ID[10:6], Instruction_ID[20:16], Instruction_ID[15:11], PCPlus4_ID, Jr, Jump, {PCPlus4_ID[31:28], ShiftedAddress[27:0]}, RegWrite_EX, ALUSrcB_EX, ALUSrcA_EX, RegDst_EX, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, HiWrite_EX, LoWrite_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_EX, rs_EX, rt_EX, Immediate_EX, ALUOp_EX, shamt_EX, rt_reg_EX, rd_reg_EX, PCPlus4_EX, Jr_EX, Jump_EX, JumpAddress);
     
     Shifter shift2(Immediate_EX, 2, shift2_out);
     Adder pc_adder2(PCAddress_EX, shift2_out, PCAddress_shift);
