@@ -4,7 +4,37 @@ Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 9a12db2147
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:89]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Jump_out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:96]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'RegDst_o' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:90]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'RegDst_in' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:91]
+WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:95]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Jump_out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:102]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.ClkDiv
+Compiling module xil_defaultlib.ProgramCounter
+Compiling module xil_defaultlib.InstructionMemory
+Compiling module xil_defaultlib.PCAdder
+Compiling module xil_defaultlib.IFIDReg
+Compiling module xil_defaultlib.RegisterFile
+Compiling module xil_defaultlib.Control
+Compiling module xil_defaultlib.HazardDetectionUnit
+Compiling module xil_defaultlib.SignExtension
+Compiling module xil_defaultlib.Shifter
+Compiling module xil_defaultlib.ControlSignalSwitch
+Compiling module xil_defaultlib.IDEXReg
+Compiling module xil_defaultlib.Adder
+Compiling module xil_defaultlib.Mux32Bit4To1
+Compiling module xil_defaultlib.Mux32Bit2To1
+Compiling module xil_defaultlib.ALUControl
+Compiling module xil_defaultlib.ALU32Bit
+Compiling module xil_defaultlib.HiLoRegisters
+Compiling module xil_defaultlib.EXMEMReg
+Compiling module xil_defaultlib.DataMemory
+Compiling module xil_defaultlib.MEMWBReg
+Compiling module xil_defaultlib.CombLogicForBranching
+Compiling module xil_defaultlib.Datapath
+Compiling module xil_defaultlib.Datapath_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot Datapath_tb_behav

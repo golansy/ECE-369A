@@ -23,12 +23,16 @@ verilog xil_defaultlib  \
 "../../../../lab9-15.srcs/sources_1/new/SevenSegment.v" \
 "../../../../lab9-15.srcs/sources_1/new/ClkDiv.v" \
 "../../../../lab9-15.srcs/sources_1/new/Two4DigitDisplay.v" \
+"../../../../lab9-15.srcs/sources_1/new/HazardDetectionUnit.v" \
+"../../../../lab9-15.srcs/sources_1/new/EqualityChecker.v" \
+"../../../../lab9-15.srcs/sources_1/new/ControlSignalSwitch.v" \
 "../../../../lab9-15.srcs/sim_1/new/ALU32Bit_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/DataMemory_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/SignExtension_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/RegisterFile_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/Datapath_tb.v" \
+"../../../../lab9-15.srcs/sim_1/new/HazardDetectionUnit_tb.v" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

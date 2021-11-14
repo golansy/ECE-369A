@@ -35,6 +35,8 @@ module Datapath_tb();
     end
     
     initial begin
+        Reset <= 0;
+        #15
         Reset <= 1;
         #15
         Reset <= 0;
