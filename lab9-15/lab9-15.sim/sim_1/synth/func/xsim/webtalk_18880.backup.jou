@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Sun Nov 14 19:46:18 2021
+# Process ID: 18880
+# Current directory: C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.sim/sim_1/synth/func/xsim
+# Command line: wbtcv.exe -mode batch -source C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.sim/sim_1/synth/func/xsim/xsim.dir/Datapath_tb_func_synth/webtalk/xsim_webtalk.tcl -notrace
+# Log file: C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.sim/sim_1/synth/func/xsim/webtalk.log
+# Journal file: C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.sim/sim_1/synth/func/xsim\webtalk.jou
+#-----------------------------------------------------------
+source C:/Users/hayes/Desktop/Programming -notrace

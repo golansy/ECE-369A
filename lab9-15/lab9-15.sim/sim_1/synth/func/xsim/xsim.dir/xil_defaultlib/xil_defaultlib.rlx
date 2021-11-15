@@ -1,0 +1,12 @@
+0.6
+2019.2
+Nov  6 2019
+21:57:16
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.sim/sim_1/synth/func/xsim/Datapath_tb_func_synth.v,1636946728,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v,,ALU32Bit;ALUControl;Adder;ClkDiv;CombLogicForBranching;Datapath;EXMEMReg;HiLoRegisters;IDEXReg;IFIDReg;MEMWBReg;Mux32Bit2To1;Mux32Bit2To1_0;Mux32Bit2To1_2;Mux32Bit4To1;Mux32Bit4To1_3;PCAdder;PCAdder_1;ProgramCounter;RegisterFile;Two4DigitDisplay;glbl,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/ALU32Bit_tb.v,1635021844,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v,,ALU32Bit_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/DataMemory_tb.v,1635443448,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/SignExtension_tb.v,,DataMemory_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Datapath_tb.v,1636892144,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/HazardDetectionUnit_tb.v,,Datapath_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/HazardDetectionUnit_tb.v,1636836186,verilog,,,,HazardDetectionUnit_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v,1633389289,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/DataMemory_tb.v,,Mux32Bit2To1_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/RegisterFile_tb.v,1633389289,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/Datapath_tb.v,,RegisterFile_tb,,,,,,,,
+C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/SignExtension_tb.v,1633389289,verilog,,C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sim_1/new/RegisterFile_tb.v,,SignExtension_tb,,,,,,,,

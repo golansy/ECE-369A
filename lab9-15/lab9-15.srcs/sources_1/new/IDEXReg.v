@@ -20,8 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IDEXReg(Clk, Reset, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branch_in, MemWrite_in, MemRead_in, MemToReg_in, HiWrite_in, LoWrite_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, PC_in, RegRead1_in, RegRead2_in, Extended_in, ALUOp_in, Instruction25_21_in, Instruction10_6_in, Instruction20_16_in, Instruction15_11_in, PC_Plus4_in, jr_in, jump_in, JumpAddress_in, RegWrite_out, ALUSrcB_out, ALUSrcA_out, RegDst_out, Branch_out, MemWrite_out, MemRead_out, MemToReg_out, HiWrite_out, LoWrite_out, Bne_out, Beq_out, Bgez_out, Bltz_out, Bgtz_out, Blez_out, PC_out, RegRead1_out, RegRead2_out, Extended_out, ALUOp_out, Instruction25_21_out, Instruction10_6_out, Instruction20_16_out, Instruction15_11_out, PC_Plus4_out, jr_out, jump_out, JumpAddress_out);
-    input Clk, Reset;
+module IDEXReg(Clk, Reset, EXFlush, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branch_in, MemWrite_in, MemRead_in, MemToReg_in, HiWrite_in, LoWrite_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, PC_in, RegRead1_in, RegRead2_in, Extended_in, ALUOp_in, Instruction25_21_in, Instruction10_6_in, Instruction20_16_in, Instruction15_11_in, PC_Plus4_in, jr_in, jump_in, JumpAddress_in, RegWrite_out, ALUSrcB_out, ALUSrcA_out, RegDst_out, Branch_out, MemWrite_out, MemRead_out, MemToReg_out, HiWrite_out, LoWrite_out, Bne_out, Beq_out, Bgez_out, Bltz_out, Bgtz_out, Blez_out, PC_out, RegRead1_out, RegRead2_out, Extended_out, ALUOp_out, Instruction25_21_out, Instruction10_6_out, Instruction20_16_out, Instruction15_11_out, PC_Plus4_out, jr_out, jump_out, JumpAddress_out);
+    input Clk, Reset, EXFlush;
     input RegWrite_in, ALUSrcB_in, ALUSrcA_in, Branch_in, HiWrite_in, LoWrite_in, Bne_in, Beq_in, Bgez_in, Bltz_in, Bgtz_in, Blez_in, jr_in, jump_in;
     input [31:0] PC_in, RegRead1_in, RegRead2_in, Extended_in, PC_Plus4_in, JumpAddress_in;
     input [4:0] ALUOp_in, Instruction10_6_in, Instruction20_16_in, Instruction15_11_in, Instruction25_21_in;
@@ -33,7 +33,7 @@ module IDEXReg(Clk, Reset, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_in, Branc
     output reg [1:0] MemWrite_out, MemRead_out, MemToReg_out, RegDst_out;
 
     always @ (posedge Clk, posedge Reset) begin
-        if (Reset == 1) begin
+        if (Reset == 1 || (EXFlush == 1)) begin
             RegWrite_out <= 0; 
             ALUSrcB_out <= 0;
             ALUSrcA_out <= 1;
