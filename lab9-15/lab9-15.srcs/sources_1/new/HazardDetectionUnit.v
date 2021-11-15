@@ -1,117 +1,68 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/08/2021 08:26:49 PM
-// Design Name: 
-// Module Name: HazardDetectionUnit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-module HazardDetectionUnit(Rs, Rt, Rd, IDEXRegisterRt, IDEXRegisterRd, EXMEMRegisterRd, IDEXRegisterRs, EXMEMRegisterRt, EXMEMRegisterRs, IFIDOpcode, IFIDFunct, IDEXMemRead, EXMEMRegWrite, IDEXRegWrite, EXMEMMemRead, EXMEMMemWrite, IDEXMemWrite, ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush);
-    input [4:0] Rs, Rt, Rd, IDEXRegisterRt, IDEXRegisterRd, EXMEMRegisterRd, IDEXRegisterRs, EXMEMRegisterRt, EXMEMRegisterRs;
-    input [5:0] IFIDOpcode, IFIDFunct; //check for branches and jumps
-    input EXMEMRegWrite, IDEXRegWrite;
-    input [1:0] IDEXMemRead, EXMEMMemRead, IDEXMemWrite, EXMEMMemWrite; 
+module HazardDetectionUnit(ID_Rs, ID_Rt, ID_op, ID_funct, EX_RegDst, MEM_RegDst, WB_RegDst, EX_RegWrite, MEM_RegWrite, WB_RegWrite, ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, MEM_Jump, PCSrc);
+    input [4:0] ID_Rs, ID_Rt, EX_RegDst, MEM_RegDst, WB_RegDst;
+    input [5:0] ID_op, ID_funct;
+    input MEM_RegWrite, EX_RegWrite, WB_RegWrite, MEM_Jump, PCSrc;
     output reg ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush;
 
     always @ (*) begin
-        IFIDWrite <= 1;
-        PCWrite <= 1;
-        ControlMux <= 1;
-        IFFlush <= 0;
-        EXFlush <= 0;
-        MEMFlush <= 0;
+        IFIDWrite = 1;
+        PCWrite = 1;
+        ControlMux = 1;
+        IFFlush = 0;
+        EXFlush = 0;
+        MEMFlush = 0;
 
-        if ((IDEXRegWrite == 1) && ((IFIDOpcode == 6'b000001) || (IFIDOpcode == 6'b000100) || (IFIDOpcode == 6'b000101) || (IFIDOpcode == 6'b000111) || (IFIDOpcode == 6'b000110) || (IFIDOpcode == 6'b000010) || (IFIDOpcode == 6'b000011) || (IFIDOpcode == 6'b000000 && IFIDFunct == 6'b001000)) &&
-        ((IDEXRegisterRd == Rs) ||     //        bgez                      beq                           bne                         bgtz                        blez                              j                          jal                                   jr
-        (IDEXRegisterRd == Rt))) begin //When R-type is in EX stage and Branch in ID stage
-            IFFlush <= 1'b1;
-            EXFlush <= 1;
-            MEMFlush <= 1;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
+        if (PCSrc == 1) begin
+            IFFlush = 1;
+            EXFlush = 1;
+            MEMFlush = 1;
         end
-
-        if ((EXMEMRegWrite == 1) && ((IFIDOpcode == 6'b000001) || (IFIDOpcode == 6'b000100) || (IFIDOpcode == 6'b000101) || (IFIDOpcode == 6'b000111) || (IFIDOpcode == 6'b000110) || (IFIDOpcode == 6'b000010) || (IFIDOpcode == 6'b000011) || (IFIDOpcode == 6'b000000 && IFIDFunct == 6'b001000)) &&
-        ((EXMEMRegisterRd == Rs) ||     //        bgez                      beq                           bne                         bgtz                        blez                              j                          jal                                   jr
-        (EXMEMRegisterRd == Rt))) begin //When R-type is in MEM stage and Branch in ID stage
-            IFFlush <= 1'b1;
-            EXFlush <= 1;
-            MEMFlush <= 1;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
+        else if (PCSrc == 0 && MEM_Jump == 1) begin
+            IFFlush = 1;
+            EXFlush = 1;
+            MEMFlush = 1;
         end
-
-        if ((IDEXMemRead == 1) && ((IFIDOpcode == 6'b000001) || (IFIDOpcode == 6'b000100) || (IFIDOpcode == 6'b000101) || (IFIDOpcode == 6'b000111) || (IFIDOpcode == 6'b000110) || (IFIDOpcode == 6'b000010) || (IFIDOpcode == 6'b000011) || (IFIDOpcode == 6'b000000 && IFIDFunct == 6'b001000)) &&
-        ((IDEXRegisterRd == Rs) ||     //        bgez                      beq                           bne                         bgtz                        blez                              j                          jal                                   jr
-        (IDEXRegisterRd == Rt))) begin //When lw is in EX stage and Branch in ID stage
-            IFFlush <= 1'b1;
-            EXFlush <= 1;
-            MEMFlush <= 1;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
+                    // j                jal                                 jr
+        else if (ID_op == 6'b000010 || ID_op == 6'b000011 || (ID_op == 6'b000000 && ID_funct == 6'b001000)) begin
+            IFFlush = 1;
+            PCWrite = 0;
         end
-
-        if ((EXMEMMemRead == 1) && ((IFIDOpcode == 6'b000001) || (IFIDOpcode == 6'b000100) || (IFIDOpcode == 6'b000101) || (IFIDOpcode == 6'b000111) || (IFIDOpcode == 6'b000110) || (IFIDOpcode == 6'b000010) || (IFIDOpcode == 6'b000011) || (IFIDOpcode == 6'b000000 && IFIDFunct == 6'b001000)) &&
-        ((EXMEMRegisterRd == Rs) ||     //        bgez                      beq                           bne                         bgtz                        blez                              j                          jal                                   jr
-        (EXMEMRegisterRd == Rt))) begin //When lw is in MEMstage and Branch in ID stage
-            IFFlush <= 1'b1;
-            EXFlush <= 1;
-            MEMFlush <= 1;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
+                    //R-type                beq                 bne                   sw
+        else if (ID_op == 6'b0 || ID_op == 6'b000100 || ID_op == 6'b000101 || ID_op == 6'b101011) begin
+            if (EX_RegWrite == 1 && EX_RegDst != 0 && (EX_RegDst == ID_Rt || EX_RegDst == ID_Rs)) begin //Dependency of rs or rt in ID stage on regDst of EX stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
+            else if (MEM_RegWrite == 1 && MEM_RegDst != 0 && (MEM_RegDst == ID_Rt || MEM_RegDst == ID_Rs)) begin //Dependency of rs or rt in ID stage on regDst of MEM stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
+            else if (WB_RegWrite == 1 && WB_RegDst != 0 && (WB_RegDst == ID_Rt || WB_RegDst == ID_Rs)) begin //Dependency of rs or rt in ID stage on regDst of WB stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
         end
-
-        if (((EXMEMRegWrite == 1) || (IDEXMemRead == 1) || (IDEXMemWrite == 1) || (EXMEMMemWrite == 1)) &&
-        (((EXMEMRegisterRd == Rs) || (EXMEMRegisterRd == Rt)) || 
-        ((IDEXRegisterRd == Rs) || (IDEXRegisterRd == Rt)))) begin //Dependent Rd and Rs or Rt
-            IFFlush <= 1'b0;
-            EXFlush <= 0;
-            MEMFlush <= 0;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
+                    //R-type                beq                 bne                 j                       jal                 sw
+        else if (ID_op != 6'b0 && ID_op != 6'b000100 && ID_op != 6'b000101 && ID_op != 6'b000010 && ID_op != 6'b000011 && ID_op != 6'b101011) begin
+            if (EX_RegWrite == 1 && EX_RegDst != 0 && EX_RegDst == ID_Rs) begin //Dependency of rs or rt in ID stage on regDst of EX stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
+            else if (MEM_RegWrite == 1 && MEM_RegDst != 0 && MEM_RegDst == ID_Rs) begin //Dependency of rs or rt in ID stage on regDst of MEM stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
+            else if (WB_RegWrite == 1 && WB_RegDst != 0 && WB_RegDst == ID_Rs) begin //Dependency of rs or rt in ID stage on regDst of WB stage (stall)
+                IFIDWrite = 0;
+                PCWrite = 0;
+                ControlMux = 0;
+            end
         end
-
-        if (((EXMEMRegWrite == 1) || (IDEXMemRead == 1) || (IDEXMemWrite == 1) || (EXMEMMemWrite == 1)) &&
-        (((EXMEMRegisterRt == Rt) || (EXMEMRegisterRt == Rt)) || 
-        ((IDEXRegisterRt == Rt) || (IDEXRegisterRt == Rt)))) begin //sw followed by lw dependency
-            IFFlush <= 1'b0;
-            EXFlush <= 0;
-            MEMFlush <= 0;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
-        end
-
-        /*if (((EXMEMRegWrite == 1) || (IDEXMemRead == 1) || (IDEXMemWrite == 1) || (EXMEMMemWrite == 1)) &&
-        (((EXMEMRegisterRs == Rs) || (EXMEMRegisterRs == Rs)) || 
-        ((IDEXRegisterRs == Rs) || (IDEXRegisterRs == Rs)))) begin //sw followed by lw dependency
-            IFFlush <= 1'b0;
-            EXFlush <= 0;
-            MEMFlush <= 0;
-            ControlMux <= 1'b0;
-            IFIDWrite <= 1'b0;
-            PCWrite <= 1'b0;
-        end*/
-
     end
-    
+
 endmodule

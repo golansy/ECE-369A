@@ -4,10 +4,8 @@ Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 9a12db2147
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'RegDst_o' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:90]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'RegDst_in' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:91]
-WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:95]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Jump_out' [C:/Users/hayes/Desktop/Programming Projects/ECE 369A Projects/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:102]
+WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:96]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Jump_out' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:103]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis

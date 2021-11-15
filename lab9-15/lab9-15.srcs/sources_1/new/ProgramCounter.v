@@ -29,14 +29,21 @@ module ProgramCounter(Address, PCResult, Reset, Clk, PCWrite);
 	input [31:0] Address;
 	input Reset, Clk, PCWrite;
 
+	reg [31:0] PC;
+
 	output reg [31:0] PCResult;
 
 	always @ (posedge Clk, posedge Reset) begin
 		if (Reset == 1) begin
+			PC <= 0; 
 			PCResult <= 0;
 		end
 		else if (PCWrite == 1) begin
+			PC <= Address;
 			PCResult <= Address;
+		end
+		else begin
+			PCResult <= PC;
 		end
 	end
 endmodule

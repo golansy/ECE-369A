@@ -896,7 +896,7 @@ always @(Instruction or PCSrc) begin
         ZeroExt = 0; 
         ALUSrcB = 1;
         ALUSrcA = 0;
-        ALUOp = 5'b00000; //sub
+        ALUOp = 5'b00000; //and
         RegDst = 0; 
         Branch = 0;
         MemWrite = 2'b00;
