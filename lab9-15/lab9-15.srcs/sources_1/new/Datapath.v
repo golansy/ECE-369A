@@ -65,6 +65,7 @@ module Datapath(Clk_in, Reset, out7, en_out);
     wire [31:0] JumpAddress, Jr_Mux_out, JumpAddress_MEM;
     wire [31:0] JumpMux_out;
     wire [31:0] ShiftedAddress;
+    (* MARK_DEBUG = "TRUE" *) wire [31:0] v0, v1;
     wire Zero, Zero_MEM;
     wire PCSrc;
     wire ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush;
@@ -79,7 +80,7 @@ module Datapath(Clk_in, Reset, out7, en_out);
     PCAdder pc_adder(Program_Counter, PCPlus4);
     IFIDReg if_id(Clk, Reset, IFFlush, IFIDWrite, PCPlus4, Instruction, PCAddress_ID, Instruction_ID, PCPlus4_ID);
     
-    RegisterFile reg_file(Instruction_ID[25:21], Instruction_ID[20:16], WriteReg_WB, WriteData, RegWrite_WB, Clk, rs, rt);
+    RegisterFile reg_file(Instruction_ID[25:21], Instruction_ID[20:16], WriteReg_WB, WriteData, RegWrite_WB, Clk, rs, rt, v0, v1);
     Control control(Instruction_ID, PCSrc, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, ALUOp, Jump, Jr);
     HazardDetectionUnit hazard(Instruction_ID[25:21], Instruction_ID[20:16], Instruction_ID[31:26], Instruction_ID[5:0], WriteReg_EX, WriteReg_MEM, WriteReg_WB, RegWrite_control, RegWrite_MEM, RegWrite_WB, ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, Jump_MEM, PCSrc);
     SignExtension sign_ext(Instruction_ID[15:0], ZeroExt, Immediate);
@@ -107,6 +108,6 @@ module Datapath(Clk_in, Reset, out7, en_out);
     Mux32Bit2To1 jump_mux(JumpMux_out, PCPlus4, JumpAddress_MEM, Jump_MEM);
     Mux32Bit2To1 pc_src(PCAddress, JumpMux_out, PCAddress_MEM, PCSrc);
     
-    Two4DigitDisplay d0(Clk, WriteData[15:0], Program_Counter[15:0], out7, en_out);
+    Two4DigitDisplay d0(Clk, v0[15:0], v1[15:0], out7, en_out);
 
 endmodule

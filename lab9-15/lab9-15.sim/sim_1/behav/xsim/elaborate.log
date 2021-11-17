@@ -4,12 +4,12 @@ Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 9a12db2147
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:96]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Jump_out' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:103]
+WARNING: [VRFC 10-3091] actual bit length 5 differs from formal bit length 32 for port 'out' [C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Datapath.v:93]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.ClkDiv
 Compiling module xil_defaultlib.ProgramCounter
 Compiling module xil_defaultlib.InstructionMemory
 Compiling module xil_defaultlib.PCAdder
@@ -28,9 +28,11 @@ Compiling module xil_defaultlib.ALUControl
 Compiling module xil_defaultlib.ALU32Bit
 Compiling module xil_defaultlib.HiLoRegisters
 Compiling module xil_defaultlib.EXMEMReg
+Compiling module xil_defaultlib.CombLogicForBranching
 Compiling module xil_defaultlib.DataMemory
 Compiling module xil_defaultlib.MEMWBReg
-Compiling module xil_defaultlib.CombLogicForBranching
+Compiling module xil_defaultlib.SevenSegment
+Compiling module xil_defaultlib.Two4DigitDisplay
 Compiling module xil_defaultlib.Datapath
 Compiling module xil_defaultlib.Datapath_tb
 Compiling module xil_defaultlib.glbl
