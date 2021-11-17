@@ -1,0 +1,326 @@
+.text
+.globl  vbsme
+
+# Your program must follow the required search pattern.  
+
+# Preconditions:
+#   1st parameter (a0) address of the first element of the dimension info (address of asize[0])
+#   2nd parameter (a1) address of the first element of the frame array (address of frame[0][0])
+#   3rd parameter (a2) address of the first element of the window array (address of window[0][0])
+# Postconditions:	
+#   result (v0) x coordinate of the block in the frame with the minimum SAD
+#          (v1) y coordinate of the block in the frame with the minimum SAD
+
+
+########################
+### CODE BEGINS HERE ###
+########################
+
+# Begin subroutine
+
+#.eqv DIAG_UP 0
+#.eqv RIGHT 1
+#.eqv DIAG_LEFT 2
+#.eqv DOWN 3
+#.eqv DONE -1
+
+vbsme:  
+	#Standard Prologue
+	addiu $sp, $sp, -24
+	sw $fp, 0($sp)
+	sw $ra, 4($sp)
+	addiu $fp, $sp, 20
+	
+	li $v0, 0 # reset $v0 and $V1
+	li $v1, 0
+	
+	lw $s0, 0($a0)	# load frame_height
+	lw $s1, 4($a0)	# load frame_width
+	lw $s2, 8($a0)	# load window_height
+	lw $s3, 12($a0)	# load window_width
+	move $s4, $a1	# save frame
+	move $s5, $a2	# save window
+	li $s6, -1 	# int minRow = -1;
+	li $s7, -1 	# int minCol = -1;
+	
+	li $t0, 0x7fffffff	# int minSAD = 0x7fffffff;
+	li $t1, 0	# int row = 0;
+	li $t2, 0	# int col = 0;
+	sub $t3, $s1, $s3	# int maxCol = frame_width - window_width;
+	sub $t4, $s0, $s2	# int maxRow = frame_height - window_height;
+	li $t5, 0	# int i = 0;
+	li $t6, 0	# int direction = 0;
+	li $t7, 0	# int curSAD = 0;
+	
+	LOOP:
+		addi $t8, $zero, -1
+		beq $t6, $t8, LOOP_END # if (direction == -1) exit loop
+		addiu $sp, $sp, -12
+		sw $s5, 0($sp) # arg 5 is window
+		sw $t1, 4($sp) # arg 6 is row
+		sw $t2, 8($sp) # arg 7 is col
+		addiu $sp, $sp, 12
+		move $a0, $s3 # a0 = window_width
+		move $a1, $s2 # a1 = window_height
+		move $a2, $s1 # a2 = frame_width
+		move $a3, $s4 # a3 = frame
+		jal getSAD
+		move $t7, $v0 #curSAD = getSAD(window_width, window_height, frame_width, frame, window, row, col);
+		
+		bgt $t7, $t0, LOOP_PC # if (curSAD > minSAD) continue;
+		move $t0, $t7 # minSAD = curSAD;
+		move $s6, $t1 # minRow = row;
+		move $s7, $t2 # minCol - col;
+		
+		LOOP_PC:
+		addiu $sp, $sp, -4
+		sw $t6, 0($sp) # arg 5 is direction
+		addiu $sp, $sp, 4
+		move $a0, $t4 # a0 = maxRow
+		move $a1, $t3 # a1 = maxCol
+		move $a2, $t1 # a2 = row
+		move $a3, $t2 # a3 = col
+		jal getDirection
+		move $t6, $v0 # direction = getDirection(maxRow, maxCol, row, col, direction);
+		
+		move $a0, $t6 # a0 = direction
+		move $a1, $t1 # a1 = row
+		move $a2, $t2 # a2 = col
+		jal updatePosition
+		move $t1, $v0 # (row, col) = updatePosition(direction, row, col);
+		move $t2, $v1
+		j LOOP
+	LOOP_END:
+	
+	move $v0, $s6 # return (minRow, minCol)
+	move $v1, $s7
+
+	#Standard Epilogue
+	lw $ra, 4($sp)
+	lw $fp, 0($sp)
+	addiu $sp, $sp, 24
+	jr $ra
+    
+.text
+.globl updatePosition
+
+updatePosition:
+	#Standard Prologue
+	addiu $sp, $sp, -24
+	sw $fp, 0($sp)
+	sw $ra, 4($sp)
+	addiu $fp, $sp, 20
+	
+	move $v0, $a1
+	move $v1, $a2
+	
+	addi $t0, $zero, 1
+	addi $t1, $zero, 2
+	addi $t2, $zero, 3
+	
+	beq $a0, $zero, UPDATE_0	# if direction == 0
+	beq $a0, $t0, UPDATE_1		# if direction == 1
+	beq $a0, $t1, UPDATE_2	# if direction == 2
+	beq $a0, $t2, UPDATE_3		# if direction == 3
+	
+	UPDATE_0:
+	addi $v0, $a1, -1	# row = row - 1;
+	UPDATE_1:
+	addi $v1, $a2, 1	# col = col + 1;
+	j UPDATE_EXIT		# return (row, col);
+	
+	UPDATE_2:
+	addi $v1, $a2, -1	# col = col - 1;
+	UPDATE_3:
+	addi $v0, $a1, 1	# row = row + 1;
+				# return (row, col);
+	UPDATE_EXIT:
+	#Standard Epilogue
+	lw $ra, 4($sp)
+	lw $fp, 0($sp)
+	addiu $sp, $sp, 24
+	jr $ra
+	
+.text
+.globl getDirection
+
+getDirection:
+	#Standard Prologue
+	addiu $sp, $sp, -28
+	sw $fp, 0($sp)
+	sw $ra, 4($sp)
+	addiu $fp, $sp, 24
+	
+	addiu $sp, $sp, -32 #adds 8 words to the stack frame to save the 8 $sX registers
+	sw $s7, 0($sp) #saves $s7
+	sw $s6, 4($sp) #saves $s6
+	sw $s5, 8($sp) #saves $s5
+	sw $s4, 12($sp) #saves $s4
+	sw $s3, 16($sp) #saves $s3
+	sw $s2, 20($sp) #saves $s2
+	sw $s1, 24($sp) #saves $s1
+	sw $s0, 28($sp) #saves $s0
+	
+	
+	lw $s0, 0($fp) # loads in the fifth argument, direction
+	
+	sub $s1, $a0, $a2 # s1 = maxRow - row;
+	sub $s2, $a1, $a3 # s2 = maxCol - col;
+	add $s3, $s1, $s2 # s3 = (maxRow - row) + (maxCol - col);
+	beq $s3, $zero, DIR_RET_minus1 # if (maxRow == row && maxCol == col) return -1;
+	
+	addi $t0, $zero, 1
+	addi $t1, $zero, 2
+	addi $t2, $zero, 3
+	
+	beq $s0, $zero, DIR_0 # if (direction == 0)
+	beq $s0, $t0, DIR_1 # if (direction == 1)
+	beq $s0, $t1, DIR_2 # if (direction == 2)
+	beq $s0, $t2, DIR_3 # if (direction == 3)
+	
+	DIR_0:
+		beq $s2, $zero, DIR_RET_3 # if (col == maxCol) return 3;
+		beq $a2, $zero, DIR_RET_1 # if (row == 0) return 1;
+		j DIR_RET_0	# else return 0;
+	
+	DIR_1:
+		beq $a0, $zero, DIR_RET_1 # if (maxRow == 0) return 1;
+		beq $a2, $zero, DIR_RET_2 # if (row == 0) return 2;
+		j DIR_RET_0	# else return 0
+	
+	DIR_2:
+		beq $s1, $zero, DIR_RET_1 # if (row == maxRow) return 1;
+		beq $a3, $zero, DIR_RET_3 # if (col == 0) return 3;
+		j DIR_RET_2	# else return 2;
+	
+	DIR_3:
+		beq $a1, $zero, DIR_RET_3 # if (maxCol == 0) return 3;
+		beq $a3, $zero, DIR_RET_0 # if (col == 0) return 0;
+		j DIR_RET_2 # else return 2;
+		
+	DIR_RET_minus1:
+		li $v0, -1 # return -1;
+		j DIR_EXIT
+	DIR_RET_0:
+		li $v0, 0 # return 0;
+		j DIR_EXIT
+	DIR_RET_1:
+		li $v0, 1 # return 1;
+		j DIR_EXIT
+	DIR_RET_2:
+		li $v0, 2 # return 2;
+		j DIR_EXIT
+	DIR_RET_3:
+		li $v0, 3 # return 3;
+		j DIR_EXIT
+	
+	DIR_EXIT:
+	lw $s0, 28($sp) #Restores $s0
+	lw $s1, 24($sp) #Restores $s1
+	lw $s2, 20($sp) #Restores $s2
+	lw $s3, 16($sp) #Restores $s3
+	lw $s4, 12($sp) #Restores $s4
+	lw $s5, 8($sp) #Restores $s5
+	lw $s6, 4($sp) #Restores $s6
+	lw $s7, 0($sp) #Restores $s7
+	addiu $sp, $sp, 32 #Reduces the stack frame size by 8 words
+	
+	#Standard Epilogue
+	lw $ra, 4($sp)
+	lw $fp, 0($sp)
+	addiu $sp, $sp, 28
+	jr $ra
+	
+.text
+.globl getSAD
+
+getSAD:
+	#Standard Prologue
+	addiu $sp, $sp, -36
+	sw $fp, 0($sp)
+	sw $ra, 4($sp)
+	addiu $fp, $sp, 24
+	
+	addiu $sp, $sp, -32 #adds 8 words to the stack frame to save the 8 $sX registers
+	sw $s7, 0($sp) #saves $s7
+	sw $s6, 4($sp) #saves $s6
+	sw $s5, 8($sp) #saves $s5
+	sw $s4, 12($sp) #saves $s4
+	sw $s3, 16($sp) #saves $s3
+	sw $s2, 20($sp) #saves $s2
+	sw $s1, 24($sp) #saves $s1
+	sw $s0, 28($sp) #saves $s0
+	
+	lw $s0, 0($fp) # loads in 5th argument, window
+	lw $s1, 4($fp) # loads in 6th argument, curRow
+	lw $s2, 8($fp) # loads in 7th argument, curCol
+	
+	li $s3, 0 	#int curFrameNum = 0;
+	li $s4, 0	#int curWin3um = 0;
+	li $s5, 0	#int curSAD = 0;
+	li $s6, 0	# int row = 0;
+	
+	SAD_ROW_LOOP:
+		bge $s6, $a1, SAD_ROW_LOOP_END # if (row >= window_height) exit loop
+		li $s7, 0	# int col = 0;
+		SAD_COL_LOOP:
+			bge $s7, $a0, SAD_COL_LOOP_END # if (col >= window_width) exit loop
+			
+			add $t9, $s6, $s1	# index = row + curRow;
+			mul $t9, $t9, $a2	# index = index * frame_width;
+			add $t9, $t9, $s7	# index = index + col;
+			add $t9, $t9, $s2	# index = index + curCol;
+			
+			add $t9, $t9, $t9   #multiplying $t9 by 4
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			
+			add $t9, $t9, $a3
+			lw $s3, 0($t9)	# curFrameNum = frame[(row + curRow) * frame_width + col + curCol];
+			
+			mul $t9, $s6, $a0	# index = row * window_width;
+			add $t9, $t9, $s7	# index = index + col;
+			
+			add $t9, $t9, $t9   #multiplying $t9 by 4
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			
+			add $t9, $t9, $s0
+			lw $s4, 0($t9)	# curWin3um = window[row * window_width + col];
+			
+			bge $s3, $s4, FRAME_GE # if (curFrameNum > curWin3um) goto FRAME_GE else continue
+			add $s5, $s5, $s4 # curSAD = curSAD + curWin3um;
+			sub $s5, $s5, $s3 # curSAD = curSAD - curFrameNum;
+			j SAD_COL_LOOP_PC
+			
+			FRAME_GE:
+				add $s5, $s5, $s3 # curSAD = curSAD + curFrameNum;
+				sub $s5, $s5, $s4 # curSAD = curSAD - curWin3um;
+			
+			SAD_COL_LOOP_PC:
+			addi $s7, $s7, 1	# col++;
+			j SAD_COL_LOOP
+		SAD_COL_LOOP_END:
+		addi $s6, $s6, 1	# row++;
+		j SAD_ROW_LOOP
+	SAD_ROW_LOOP_END:
+	
+	move $v0, $s5 # return curSAD;
+	
+	lw $s0, 28($sp) #Restores $s0
+	lw $s1, 24($sp) #Restores $s1
+	lw $s2, 20($sp) #Restores $s2
+	lw $s3, 16($sp) #Restores $s3
+	lw $s4, 12($sp) #Restores $s4
+	lw $s5, 8($sp) #Restores $s5
+	lw $s6, 4($sp) #Restores $s6
+	lw $s7, 0($sp) #Restores $s7
+	addiu $sp, $sp, 32 #Reduces the stack frame size by 8 words
+	
+	#Standard Epilogue
+	lw $ra, 4($sp)
+	lw $fp, 0($sp)
+	addiu $sp, $sp, 36
+	jr $ra
