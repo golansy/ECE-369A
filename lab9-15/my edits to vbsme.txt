@@ -463,7 +463,7 @@ vbsme:
 	addi $t7, $zero, 0	# int curSAD = 0;
 	
 	LOOP:
-        	addi $t8, $zero, -1
+        addi $t8, $zero, -1
 		beq $t6, $t8, LOOP_END # if (direction == DONE) exit loop
 		addiu $sp, $sp, -12
 		sw $s5, 0($sp) # arg 5 is window
@@ -683,14 +683,22 @@ getSAD:
 			add $t9, $t9, $s7	# index = index + col;
 			add $t9, $t9, $s2	# index = index + curCol;
 			
-			mul $t9, $t9, 4
+			add $t9, $t9, $t9   #multiplying $t9 by 4
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+
 			add $t9, $t9, $a3
 			lw $s3, 0($t9)	# curFrameNum = frame[(row + curRow) * frame_width + col + curCol];
 			
 			mul $t9, $s6, $a0	# index = row * window_width;
 			add $t9, $t9, $s7	# index = index + col;
 			
-			mul $t9, $t9, 4
+			add $t9, $t9, $t9   #multiplying $t9 by 4
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+			add $t9, $t9, $t9
+
 			add $t9, $t9, $s0
 			lw $s4, 0($t9)	# curWindowNum = window[row * window_width + col];
 			
