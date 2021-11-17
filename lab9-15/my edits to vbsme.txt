@@ -285,6 +285,11 @@ window4:	.word 1, 1, 1, 1,
 ### main
 ########################################################################################################################
 
+.text
+
+.globl main
+
+main:
 # Start test 0 
 ############################################################
 la      $a0, asize0     # 1st parameter: address of asize1[0]
@@ -683,10 +688,8 @@ getSAD:
 			add $t9, $t9, $s7	# index = index + col;
 			add $t9, $t9, $s2	# index = index + curCol;
 			
-			add $t9, $t9, $t9   #multiplying $t9 by 4
-			add $t9, $t9, $t9
-			add $t9, $t9, $t9
-			add $t9, $t9, $t9
+			addi $t8, $zero, 4
+			mul $t9, $t9, $t8   #multiplying $t9 by 4
 
 			add $t9, $t9, $a3
 			lw $s3, 0($t9)	# curFrameNum = frame[(row + curRow) * frame_width + col + curCol];
@@ -694,11 +697,9 @@ getSAD:
 			mul $t9, $s6, $a0	# index = row * window_width;
 			add $t9, $t9, $s7	# index = index + col;
 			
-			add $t9, $t9, $t9   #multiplying $t9 by 4
-			add $t9, $t9, $t9
-			add $t9, $t9, $t9
-			add $t9, $t9, $t9
-
+			addi $t8, $zero, 4
+			mul $t9, $t9, $t8   #multiplying $t9 by 4
+			
 			add $t9, $t9, $s0
 			lw $s4, 0($t9)	# curWindowNum = window[row * window_width + col];
 			

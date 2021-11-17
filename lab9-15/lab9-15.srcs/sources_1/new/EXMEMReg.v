@@ -32,7 +32,7 @@ module EXMEMReg(Clk, Reset, MEMFlush, Zero_in, RegWrite_in, Branch_in, MemWrite_
     output reg [4:0] write_reg_out;
     output reg [1:0] MemWrite_out, MemRead_out, MemToReg_out;
 
-    always @ (posedge Clk) begin
+    always @ (posedge Clk or posedge Reset) begin
         if (Reset == 1 || MEMFlush == 1) begin
             Zero_out <= 0;
             RegWrite_out <= 0;

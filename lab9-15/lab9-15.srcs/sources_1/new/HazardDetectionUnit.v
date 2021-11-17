@@ -4,15 +4,6 @@ module HazardDetectionUnit(ID_Rs, ID_Rt, ID_op, ID_funct, EX_RegDst, MEM_RegDst,
     input MEM_RegWrite, EX_RegWrite, WB_RegWrite, MEM_Jump, PCSrc;
     output reg ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush;
 
-    initial begin
-        IFIDWrite = 1;
-        PCWrite = 1;
-        ControlMux = 1;
-        IFFlush = 0;
-        EXFlush = 0;
-        MEMFlush = 0;
-    end
-
     always @ (*) begin
         IFIDWrite = 1;
         PCWrite = 1;
