@@ -32,7 +32,7 @@ module IDEXReg(Clk, Reset, EXFlush, RegWrite_in, ALUSrcB_in, ALUSrcA_in, RegDst_
     output reg [4:0] ALUOp_out, Instruction10_6_out, Instruction20_16_out, Instruction15_11_out;
     output reg [1:0] MemWrite_out, MemRead_out, MemToReg_out, RegDst_out;
 
-    always @ (posedge Clk or posedge EXFlush) begin
+    always @ (posedge Clk) begin
         if (Reset == 1 || EXFlush == 1) begin
             RegWrite_out <= 0; 
             ALUSrcB_out <= 0;

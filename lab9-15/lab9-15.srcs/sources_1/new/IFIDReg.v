@@ -25,7 +25,7 @@ module IFIDReg(Clk, Reset, IFFlush, IFIDWrite, PC_in, IM_in, PC_out, IM_out, PC_
     input [31:0] PC_in, IM_in;
     output reg [31:0] PC_out, IM_out, PC_Plus4_out;
     
-    always @ (posedge Clk or posedge IFFlush) begin
+    always @ (posedge Clk) begin
         if (Reset == 1 || IFFlush == 1) begin
             PC_out <= 0;
             IM_out <= 0;

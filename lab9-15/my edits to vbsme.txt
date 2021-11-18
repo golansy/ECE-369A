@@ -290,6 +290,9 @@ window4:	.word 1, 1, 1, 1,
 .globl main
 
 main:
+
+addi $sp, $zero, 6200
+
 # Start test 0 
 ############################################################
 la      $a0, asize0     # 1st parameter: address of asize1[0]
