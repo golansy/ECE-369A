@@ -24,8 +24,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Datapath(Clk_in, Reset, out7, en_out);
-    input Clk_in, Reset;
+module Datapath(Clk, Reset, out7, en_out);
+    input Clk, Reset;
     wire [31:0] PCAddress, PCAddress_ID, PCAddress_EX, PCAddress_shift, PCAddress_MEM;
     (* MARK_DEBUG = "TRUE" *) wire [31:0] Program_Counter;
     wire [31:0] PCPlus4, PCPlus4_ID, PCPlus4_EX, PCPlus4_MEM, PCPlus8, PCPlus4_WB;
@@ -73,7 +73,7 @@ module Datapath(Clk_in, Reset, out7, en_out);
     output [6:0] out7; //seg a, b, ... g n
     output [7:0] en_out;
     
-    ClkDiv cd0(Clk_in, Reset, Clk);
+    //ClkDiv cd0(Clk_in, Reset, Clk);
     
     ProgramCounter pc(PCAddress, Program_Counter, Reset, Clk, PCWrite);
     InstructionMemory im(Program_Counter, Instruction);

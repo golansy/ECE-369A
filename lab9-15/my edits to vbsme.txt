@@ -457,6 +457,8 @@ vbsme:
 	add $s5, $a2, $zero	# save window
 	addi $s6, $zero, -1 	# int minRow = -1;
 	addi $s7, $zero, -1 	# int minCol = -1;
+	add $v0, $zero, $s6 	# int minRow = -1;
+	add $v1, $zero, $s7	# int minCol = -1;
 	
 	addi $t0, $zero, 0x7fffffff	# int minSAD = 0x7fffffff;
 	addi $t1, $zero, 0	# int row = 0;
@@ -486,6 +488,8 @@ vbsme:
 		add $t0, $t7, $zero # minSAD = curSAD;
 		add $s6, $t1, $zero # minRow = row;
 		add $s7, $t2, $zero # minCol - col;
+		add $v0, $zero, $s6 # minRow = row;
+		add $v1, $zero, $s7 # minCol - col
 		
 		LOOP_PC:
 		addiu $sp, $sp, -4
