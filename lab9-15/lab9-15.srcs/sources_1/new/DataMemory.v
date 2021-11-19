@@ -51,7 +51,7 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
     always @(posedge Clk) begin
         case (MemWrite)
             2'b01 : begin
-                memory[Address[11:2]] <= WriteData;
+                memory[Address[14:2]] <= WriteData;
             end
             2'b10 : begin
                 if (Address[1] == 0) memory[Address[14:2]] <= (memory[Address[14:2]] & 32'hffff0000) | (WriteData[15:0] << (Address[1] * 16));
@@ -74,7 +74,7 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
                 ReadData <= 32'b0;
             end
             2'b01 : begin
-                ReadData = memory[Address[11:2]];  //word 
+                ReadData = memory[Address[14:2]];  //word 
             end
             2'b10 : begin    //halfword
                 if (Address[1] == 1) ReadData <= {{16{memory[Address[14:2]][31]}}, (memory[Address[14:2]][31:16])};
