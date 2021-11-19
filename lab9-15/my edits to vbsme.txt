@@ -463,7 +463,7 @@ vbsme:
 	add $v0, $zero, $s6 	# int minRow = -1;
 	add $v1, $zero, $s7	# int minCol = -1;
 	
-	addi $t0, $zero, 0x7fffffff	# int minSAD = 0x7fffffff;
+	addi $t0, $zero, 0x7fff	# int minSAD = 0x7fffffff;
 	addi $t1, $zero, 0	# int row = 0;
 	addi $t2, $zero, 0	# int col = 0;
 	sub $t3, $s1, $s3	# int maxCol = frame_width - window_width;
@@ -487,7 +487,10 @@ vbsme:
 		jal getSAD
 		add $t7, $v0, $zero #curSAD = getSAD(window_width, window_height, frame_width, frame, window, row, col);
 		
-		bgt $t7, $t0, LOOP_PC # if (curSAD > minSAD) continue;
+		#bgt $t7, $t0, LOOP_PC # if (curSAD > minSAD) continue;
+		sub $t8, $t7, $t0
+		bgtz $t8, LOOP_PC
+
 		add $t0, $t7, $zero # minSAD = curSAD;
 		add $s6, $t1, $zero # minRow = row;
 		add $s7, $t2, $zero # minCol - col;
@@ -712,7 +715,7 @@ getSAD:
 			
 			#bge $s3, $s4, FRAME_GE # if (curFrameNum > curWindowNum) goto FRAME_GE else continue
 			sub $t8, $s3, $s4
-			bgtz $t8, FRAME_GE
+			bgez $t8, FRAME_GE
 			add $s5, $s5, $s4 # curSAD = curSAD + curWindowNum;
 			sub $s5, $s5, $s3 # curSAD = curSAD - curFrameNum;
 			j SAD_COL_LOOP_PC

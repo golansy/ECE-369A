@@ -27,8 +27,8 @@ module HazardDetectionUnit(ID_Rs, ID_Rt, ID_op, ID_funct, EX_RegDst, MEM_RegDst,
             IFFlush = 1;
             PCWrite = 0;
         end
-                    //R-type                beq                 bne                   sw
-        else if (ID_op == 6'b0 || ID_op == 6'b000100 || ID_op == 6'b000101 || ID_op == 6'b101011) begin
+                    //R-type                beq                 bne                   sw                                mul
+        else if (ID_op == 6'b0 || ID_op == 6'b000100 || ID_op == 6'b000101 || ID_op == 6'b101011 || (ID_op == 6'b011100 && ID_funct == 6'b000010)) begin
             if (EX_RegWrite == 1 && EX_RegDst != 0 && (EX_RegDst == ID_Rt || EX_RegDst == ID_Rs)) begin //Dependency of rs or rt in ID stage on regDst of EX stage (stall)
                 IFIDWrite = 0;
                 PCWrite = 0;
