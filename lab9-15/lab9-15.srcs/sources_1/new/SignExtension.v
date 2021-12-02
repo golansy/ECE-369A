@@ -16,7 +16,7 @@ module SignExtension(in, ZeroExt, out);
     
     always @ (in or ZeroExt) begin
         if (ZeroExt == 0) out = {{16{in[15]}}, in};
-        if (ZeroExt == 1) out = {16'b0, in};
+        else out = {16'b0, in};
     end
 
 endmodule

@@ -27,11 +27,12 @@ module CombLogicForBranching(Zero, bne, beq, bgez, bltz, bgtz, blez, msb_rs, bra
     always @ (Zero or bne or beq or bgez or bltz or bgtz or blez or msb_rs or branch) begin
         if (branch == 1) begin //PCSrc = ((msb_rs | Zero) ^ bgtz) | (bne ^ Zero) | (bgez ^ msb_rs);
             if (bne == 1) PCSrc = ~Zero;
-            if (beq == 1) PCSrc = Zero;
-            if (bgez == 1) PCSrc = ~msb_rs;
-            if (bltz == 1) PCSrc = msb_rs;
-            if (bgtz == 1) PCSrc = (~Zero) & (~msb_rs);
-            if (blez == 1) PCSrc = msb_rs | Zero;
+            else if (beq == 1) PCSrc = Zero;
+            else if (bgez == 1) PCSrc = ~msb_rs;
+            else if (bltz == 1) PCSrc = msb_rs;
+            else if (bgtz == 1) PCSrc = (~Zero) & (~msb_rs);
+            else if (blez == 1) PCSrc = msb_rs | Zero;
+            else PCSrc = 0;
         end
         else PCSrc = 0;
     end

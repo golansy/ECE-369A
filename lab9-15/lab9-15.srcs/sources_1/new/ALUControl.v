@@ -30,6 +30,7 @@ module ALUControl(ALUOp, RegWrite_in, Funct, rt_in, ALUCntrl, RegWrite_out);
     
     always @ (ALUOp or RegWrite_in or Funct or rt_in) begin
         RegWrite_out = RegWrite_in;
+        ALUCntrl = ALUOp;
         case (ALUOp)
             5'b11111 : begin
                 case (Funct)
