@@ -24,8 +24,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Datapath(Clk_in, Reset, out7, en_out);
-    input Clk_in, Reset;
+module Datapath(Clk, Reset, v0, v1);
+    input Clk, Reset;
     wire [31:0] PCAddress, PCAddress_ID, PCAddress_EX, PCAddress_shift, PCAddress_MEM;
     (* MARK_DEBUG = "TRUE" *) wire [31:0] Program_Counter;
     wire [31:0] PCPlus4, PCPlus4_ID, PCPlus4_EX, PCPlus4_MEM, PCPlus8, PCPlus4_WB;
@@ -65,15 +65,11 @@ module Datapath(Clk_in, Reset, out7, en_out);
     wire [31:0] JumpAddress, Jr_Mux_out, JumpAddress_MEM;
     wire [31:0] JumpMux_out;
     wire [31:0] ShiftedAddress;
-    (* MARK_DEBUG = "TRUE" *) wire [31:0] v0, v1;
+    output [31:0] v0, v1;
     wire Zero, Zero_MEM;
     wire PCSrc;
     wire ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush;
     wire PCSrc_o, RegWrite_o, ZeroExt_o, ALUSrcB_o, ALUSrcA_o, Branch_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, Jump_o, Jr_o;
-    output [6:0] out7; //seg a, b, ... g n
-    output [7:0] en_out;
-    
-    ClkDiv cd0(Clk_in, Reset, Clk);
     
     ProgramCounter pc(PCAddress, Program_Counter, Reset, Clk, PCWrite);
     InstructionMemory im(Program_Counter, Instruction);
@@ -101,13 +97,9 @@ module Datapath(Clk_in, Reset, out7, en_out);
 
     CombLogicForBranching branch_logic(Zero_MEM, Bne_MEM, Beq_MEM, Bgez_MEM, Bltz_MEM, Bgtz_MEM, Blez_MEM, rs_MEM[31], Branch_MEM, PCSrc);
     DataMemory data_mem(ALUResult_MEM, rt_MEM, Clk, MemWrite_MEM, MemRead_MEM, ReadData);
-    //PCAdder pc_adder_8(PCPlus4_MEM, PCPlus8);
     MEMWBReg mem_wb(Clk, Reset, RegWrite_MEM, MemToReg_MEM, ALUResult_MEM, ReadData, WriteReg_MEM, PCPlus4_MEM, RegWrite_WB, MemToReg_WB, ALUResult_WB, ReadData_WB, WriteReg_WB, PCPlus4_WB);
     
     Mux32Bit4To1 mem_to_reg(WriteData, ReadData_WB, ALUResult_WB, PCPlus4_WB, 0, MemToReg_WB);
     Mux32Bit2To1 jump_mux(JumpMux_out, PCPlus4, JumpAddress_MEM, Jump_MEM);
     Mux32Bit2To1 pc_src(PCAddress, JumpMux_out, PCAddress_MEM, PCSrc);
-    
-    Two4DigitDisplay d0(Clk, v0, v1, out7, en_out);
-
 endmodule

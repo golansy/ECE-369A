@@ -1,11 +1,11 @@
 ##Set clock frequency to 100 MHz. Helps guide the placement and routing algorithm
 ##to synthesize design that satisfies this constraint, and gives better power estimations
 ## 100 MHz frequency, 10 ns period,, duty cycle 50%, no phase shift
-create_clock -period 10 [get_ports Clk_in]
+create_clock -period 10 [get_ports Clk]
 
 ##This part is to assign a pin number to 100MHz clock signal
-set_property PACKAGE_PIN E3 [get_ports Clk_in]
-set_property IOSTANDARD LVCMOS33 [get_ports Clk_in]
+set_property PACKAGE_PIN E3 [get_ports Clk]
+set_property IOSTANDARD LVCMOS33 [get_ports Clk]
 
 ## This part is to activate or deactive ANODE of each display digit
 set_property IOSTANDARD LVCMOS33 [get_ports {en_out[0]}]
