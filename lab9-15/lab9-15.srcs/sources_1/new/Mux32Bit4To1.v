@@ -18,6 +18,7 @@ module Mux32Bit4To1(out, in0, in1, in2, in3, sel);
     input [1:0] sel;
 
     always @ (in0 or in1 or in2 or in3 or sel) begin
+        out = 0;
         if (sel == 0) out = in0;
         else if (sel == 1) out = in1;
         else if (sel == 2) out = in2;

@@ -30,7 +30,7 @@ module ALUControl(ALUOp, RegWrite_in, Funct, rt_in, ALUCntrl, RegWrite_out);
     
     always @ (ALUOp or RegWrite_in or Funct or rt_in) begin
         RegWrite_out = RegWrite_in;
-        ALUCntrl = ALUOp;
+        ALUCntrl = 5'b0;
         case (ALUOp)
             5'b11111 : begin
                 case (Funct)
@@ -39,14 +39,20 @@ module ALUControl(ALUOp, RegWrite_in, Funct, rt_in, ALUCntrl, RegWrite_out);
                             RegWrite_out = 0;
                             ALUCntrl = 5'b10001; //PASSA
                         end
-                        else RegWrite_out = 0;
+                        else begin 
+                            RegWrite_out = 0;
+                            ALUCntrl = 5'b00000;
+                        end
                     end
                     6'b001011 : begin //MOVN
                         if (rt_in != 0) begin
                             RegWrite_out = 1;
                             ALUCntrl = 5'b10001; //PASSA
                         end
-                        else RegWrite_out = 0;
+                        else begin
+                            RegWrite_out = 0;
+                            ALUCntrl = 5'b00000;
+                        end
                     end
                     6'b000000 : ALUCntrl = 5'b00011; //SLL
                     //6'b000010 : ALUCntrl = 5'b00100; //SRL

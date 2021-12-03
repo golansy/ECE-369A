@@ -29,6 +29,6 @@ module TopLevel(Clk, Reset, out7, en_out);
     
     ClkDiv cd0(Clk, Reset, Clk_out);
     Datapath datapath(Clk_out, Reset, v0, v1);
-    Two4DigitDisplay d0(Clk, v0, v1, out7, en_out);
+    Two4DigitDisplay d0(Clk, v0[15:0], v1[15:0], out7, en_out);
     
 endmodule

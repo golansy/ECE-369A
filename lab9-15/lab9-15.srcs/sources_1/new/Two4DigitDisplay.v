@@ -14,11 +14,11 @@
 
 module Two4DigitDisplay(Clk, NumberA, NumberB, out7, en_out);
 
-    //parameter NUM_WIDTH = 16;
-    parameter NUM_WIDTH = 32;
+    parameter NUM_WIDTH = 16;
+    //parameter NUM_WIDTH = 32;
 
     input  Clk;
-    (* MARK_DEBUG = "TRUE" *) input  [NUM_WIDTH - 1:0] NumberA, NumberB;
+    input  [NUM_WIDTH - 1:0] NumberA, NumberB;
     output [6:0] out7; //seg a, b, ... g
     output reg [7:0] en_out;
              

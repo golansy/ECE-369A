@@ -49,18 +49,28 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
         case (ALUControl) 
             5'b00000 : begin //AND
                 ALUResult = A & B;
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00001 : begin //OR
                 ALUResult = A | B;
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00010 : begin //add
                 ALUResult = A + B;
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00011 : begin //shift left logical
                 ALUResult = B << A[4:0];
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00100 : begin //shift right logical
                 ALUResult = B >> A[4:0];
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00101 : begin //mult
                 temp = $signed(A) * $signed(B);
@@ -70,8 +80,12 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
             end
             5'b00110 : begin //sub
                 ALUResult = A - B;
+                hi_output = hi_output;
+                lo_output = lo_output;
             end
             5'b00111 : begin //set less than
+                hi_output = hi_output;
+                lo_output = lo_output;
                 if($signed(A) < $signed(B))
                     ALUResult = 1'b1;
                 else
@@ -90,46 +104,70 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                 lo_output = temp[31:0];
             end
             5'b01010 : begin //lui
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = {B[15:0],16'b0};
             end
             5'b01011 : begin //mthi 
+                lo_output = lo_output;
                 hi_output = A;   
             end
             5'b01100 : begin //NOR
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = ~(A | B);
             end
             5'b01101 : begin //XOR
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = A ^ B;
             end
             5'b01110 : begin //mtlo
+                hi_output = hi_output;
                 lo_output = A;
             end
             5'b01111 : begin //mfhi
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = hi_input;
             end
             5'b10000 : begin //mflo
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = lo_input;
             end
             5'b10001 : begin //pass A
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = A;
             end
             5'b10010 : begin //sltu
+                hi_output = hi_output;
+                lo_output = lo_output;
                 if(A < B)
                     ALUResult = 1'b1;
                 else
                     ALUResult = 1'b0;
             end
             5'b10011 : begin //rotr
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = (B >> A[4:0]) | (B << (32 - A[4:0]));
 //                ALUResult = {B[A[4:0]:0], B[31:A[4:0]]};
             end
             5'b10100 : begin //sra
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = $signed(B) >>> A[4:0];
             end
             5'b10101 : begin //seh
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = {{16{B[15]}}, B[15:0]};
             end
             5'b10110 : begin //seb
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = {{24{B[7]}}, B[7:0]};
             end
             5'b10111 : begin //multu
@@ -139,13 +177,19 @@ module ALU32Bit(Clk, ALUControl, A, B, hi_input, lo_input, ALUResult, Zero, hi_o
                 ALUResult = lo_output;
             end
             5'b11000 : begin //mul
+                hi_output = hi_output;
+                lo_output = lo_output;
                 temp = $signed(A) * $signed(B);
                 ALUResult = temp[31:0];
             end
             5'b11001 : begin //Add0
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = A + 32'b0;
             end
             default: begin 
+                hi_output = hi_output;
+                lo_output = lo_output;
                 ALUResult = ALUResult;
             end
         endcase
