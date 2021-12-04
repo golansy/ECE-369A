@@ -2,12 +2,94 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Wed Dec  1 17:10:20 2021
-# Process ID: 20136
+# Start of session at: Fri Dec  3 15:33:43 2021
+# Process ID: 8484
 # Current directory: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1452 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9364 C:\Users\Nathaniel\Documents\_nrod968\School\ECE-369A\lab9-15\lab9-15.xpr
 # Log file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/vivado.log
 # Journal file: C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
+oopen_project C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.xpr
+
+launch_simulation
+source Datapath_tb.tcl
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 21
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 33
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 38
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 43
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 51
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 56
+remove_bps -file {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/HazardDetectionUnit.v} -line 61
+restart
+run 25 ms
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IFStage.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IFStage.v
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IDStage.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/IDStage.v
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/WBStage.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/WBStage.v
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/EXStage.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/EXStage.v
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/MEMStage.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/MEMStage.v
+close_sim
+launch_simulation
+launch_simulation
+source Datapath_tb.tcl
+close_sim
+launch_simulation
+source Datapath_tb.tcl
+restart
+run 25 ms
+save_wave_config {C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg}
+add_files -fileset sim_1 -norecurse C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+set_property xsim.view C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg [get_filesets sim_1]
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close [ open C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux5bit4To1.v w ]
+add_files C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/lab9-15.srcs/sources_1/new/Mux5bit4To1.v
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+launch_simulation -mode post-synthesis -type functional
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close_sim
+launch_simulation
+open_wave_config C:/Users/Nathaniel/Documents/_nrod968/School/ECE-369A/lab9-15/Datapath_tb_behav.wcfg
+source Datapath_tb.tcl
+restart
+run 25 ms
+close_sim

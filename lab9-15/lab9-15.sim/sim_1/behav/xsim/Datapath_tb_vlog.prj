@@ -26,6 +26,13 @@ verilog xil_defaultlib  \
 "../../../../lab9-15.srcs/sources_1/new/HazardDetectionUnit.v" \
 "../../../../lab9-15.srcs/sources_1/new/EqualityChecker.v" \
 "../../../../lab9-15.srcs/sources_1/new/ControlSignalSwitch.v" \
+"../../../../lab9-15.srcs/sources_1/new/TopLevel.v" \
+"../../../../lab9-15.srcs/sources_1/new/IFStage.v" \
+"../../../../lab9-15.srcs/sources_1/new/IDStage.v" \
+"../../../../lab9-15.srcs/sources_1/new/WBStage.v" \
+"../../../../lab9-15.srcs/sources_1/new/EXStage.v" \
+"../../../../lab9-15.srcs/sources_1/new/MEMStage.v" \
+"../../../../lab9-15.srcs/sources_1/new/Mux5bit4To1.v" \
 "../../../../lab9-15.srcs/sim_1/new/ALU32Bit_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/Mux32Bit2To1_tb.v" \
 "../../../../lab9-15.srcs/sim_1/new/DataMemory_tb.v" \
