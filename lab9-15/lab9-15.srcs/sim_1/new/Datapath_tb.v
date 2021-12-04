@@ -31,12 +31,14 @@ module Datapath_tb();
     
     initial begin
         Clk <= 1'b1;
-        forever #5 Clk <= ~Clk;
+        forever #1 Clk <= ~Clk;
+//        forever #5 Clk <= ~Clk;
     end
     
     initial begin
         Reset <= 1;
-        #15
+        #3
+//        #15
         Reset <= 0;
     end
 endmodule

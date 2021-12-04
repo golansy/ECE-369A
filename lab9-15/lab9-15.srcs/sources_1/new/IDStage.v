@@ -37,7 +37,7 @@ module IDStage(Clk, Instruction, WriteReg_WB, WriteData, RegWrite_WB, PCSrc, Wri
     
     RegisterFile reg_file(Instruction[25:21], Instruction[20:16], WriteReg_WB, WriteData, RegWrite_WB, Clk, rs, rt, v0, v1);
     Control control(Instruction, PCSrc, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, ALUOp, Jump, Jr);
-    HazardDetectionUnit hazard(Instruction[25:21], Instruction[20:16], Instruction[31:26], Instruction[5:0], WriteReg_EX, WriteReg_MEM, WriteReg_WB, RegWrite_EX, RegWrite_MEM, RegWrite_WB, ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, Jump_MEM, PCSrc);
+    HazardDetectionUnit hazard(Instruction[25:21], Instruction[20:16], Instruction[31:26], Instruction[5:0], WriteReg_EX, WriteReg_MEM, RegWrite_EX, RegWrite_MEM, ControlMux, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, Jump_MEM, PCSrc);
     SignExtension sign_ext(Instruction[15:0], ZeroExt, Immediate);
     Shifter shift2_1(Instruction, 2, ShiftedAddress);
     ControlSignalSwitch csw(ControlMux, RegWrite, ZeroExt, ALUSrcB, ALUSrcA, RegDst, Branch, MemWrite, MemRead, MemToReg, HiWrite, LoWrite, Bne, Beq, Bgez, Bltz, Bgtz, Blez, ALUOp, Jump, Jr, RegWrite_o, ZeroExt_o, ALUSrcB_o, ALUSrcA_o, RegDst_o, Branch_o, MemWrite_o, MemRead_o, MemToReg_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, ALUOp_o, Jump_o, Jr_o);

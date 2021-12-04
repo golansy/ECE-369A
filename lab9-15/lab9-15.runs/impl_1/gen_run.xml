@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1635468751">
-  <File Type="PA-TCL" Name="Datapath.tcl"/>
   <File Type="BITSTR-BMM" Name="Datapath_bd.bmm"/>
-  <File Type="REPORTS-TCL" Name="Datapath_reports.tcl"/>
+  <File Type="PA-TCL" Name="Datapath.tcl"/>
   <File Type="OPT-DCP" Name="Datapath_opt.dcp"/>
+  <File Type="REPORTS-TCL" Name="Datapath_reports.tcl"/>
   <File Type="OPT-HWDEF" Name="Datapath.hwdef"/>
   <File Type="PWROPT-DCP" Name="Datapath_pwropt.dcp"/>
   <File Type="PLACE-DCP" Name="Datapath_placed.dcp"/>
@@ -27,8 +27,8 @@
   <File Type="BITSTR-NKY" Name="Datapath.nky"/>
   <File Type="PDI-FILE" Name="Datapath.pdi"/>
   <File Type="RCFI_FILE" Name="Datapath.rcfi"/>
-  <File Type="CFI_FILE" Name="Datapath.cfi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="CFI_FILE" Name="Datapath.cfi"/>
   <File Type="RNPI_FILE" Name="Datapath.rnpi"/>
   <File Type="NPI_FILE" Name="Datapath.npi"/>
   <File Type="RBD_FILE" Name="Datapath.rbd"/>

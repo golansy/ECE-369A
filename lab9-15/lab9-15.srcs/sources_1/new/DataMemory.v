@@ -68,7 +68,7 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
         endcase
     end
     
-    always @(negedge Clk) begin
+    always @(Address, MemRead, memory) begin
         case (MemRead)
             2'b00 : begin
                 ReadData <= 32'b0;
