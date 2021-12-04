@@ -74,18 +74,19 @@ module DataMemory(Address, WriteData, Clk, MemWrite, MemRead, ReadData);
                 ReadData <= 32'b0;
             end
             2'b01 : begin
-                ReadData = memory[Address[14:2]];  //word 
+                ReadData <= memory[Address[14:2]];  //word 
             end
             2'b10 : begin    //halfword
                 if (Address[1] == 1) ReadData <= {{16{memory[Address[14:2]][31]}}, (memory[Address[14:2]][31:16])};
-                if (Address[1] == 0) ReadData <= {{16{memory[Address[14:2]][15]}}, (memory[Address[14:2]][15:0])};
+                else ReadData <= {{16{memory[Address[14:2]][15]}}, (memory[Address[14:2]][15:0])};
             end
             2'b11 : begin   //byte
                 if (Address[1:0] == 0) ReadData <= {{24{memory[Address[14:2]][7]}}, (memory[Address[14:2]][7:0])};
-                if (Address[1:0] == 1) ReadData <= {{24{memory[Address[14:2]][15]}}, (memory[Address[14:2]][15:8])};
-                if (Address[1:0] == 2) ReadData <= {{24{memory[Address[14:2]][23]}}, (memory[Address[14:2]][23:16])};
-                if (Address[1:0] == 3) ReadData <= {{24{memory[Address[14:2]][31]}}, (memory[Address[14:2]][31:24])};
+                else if (Address[1:0] == 1) ReadData <= {{24{memory[Address[14:2]][15]}}, (memory[Address[14:2]][15:8])};
+                else if (Address[1:0] == 2) ReadData <= {{24{memory[Address[14:2]][23]}}, (memory[Address[14:2]][23:16])};
+                else ReadData <= {{24{memory[Address[14:2]][31]}}, (memory[Address[14:2]][31:24])};
             end
+            default : ReadData <= 32'b0;
         endcase
     end
 

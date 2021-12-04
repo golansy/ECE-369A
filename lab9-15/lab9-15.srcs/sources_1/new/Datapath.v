@@ -58,7 +58,6 @@ module Datapath(Clk, Reset, v0, v1);
     wire [31:0] ReadData, ReadData_WB;
     wire [31:0] JumpAddress, Jr_Mux_out, JumpAddress_MEM;
     wire [31:0] JumpMux_out;
-    wire [31:0] ShiftedAddress;
     output [31:0] v0, v1;
     wire Zero, Zero_MEM;
     wire PCSrc;
@@ -68,11 +67,11 @@ module Datapath(Clk, Reset, v0, v1);
     IFStage if0(Clk, Reset, JumpMux_out, PCAddress_MEM, PCSrc, PCWrite, PCPlus4, Instruction, Program_Counter);
     IFIDReg if_id(Clk, Reset, IFFlush, IFIDWrite, PCPlus4, Instruction, PCAddress_ID, Instruction_ID, PCPlus4_ID);
     
-    IDStage id0(Clk, Instruction_ID, WriteReg_WB, WriteData, RegWrite_WB, PCSrc, WriteReg_EX, WriteReg_MEM, WriteReg_WB, RegWrite_MEM, RegWrite_control, Jump_MEM, RegWrite_o, ALUSrcB_o, ALUSrcA_o, RegDst_o, Branch_o, MemWrite_o, MemRead_o, MemToReg_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, rs, rt, Immediate, ALUOp_o, Jr_o, Jump_o, v0, v1, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, ShiftedAddress);
-    IDEXReg id_ex(Clk, Reset, EXFlush, RegWrite_o, ALUSrcB_o, ALUSrcA_o, RegDst_o, Branch_o, MemWrite_o, MemRead_o, MemToReg_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, PCAddress_ID, rs, rt, Immediate, ALUOp_o, Instruction_ID[10:6], Instruction_ID[20:16], Instruction_ID[15:11], PCPlus4_ID, Jr_o, Jump_o, {PCPlus4_ID[31:28], ShiftedAddress[27:0]}, RegWrite_EX, ALUSrcB_EX, ALUSrcA_EX, RegDst_EX, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, HiWrite_EX, LoWrite_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_EX, rs_EX, rt_EX, Immediate_EX, ALUOp_EX, shamt_EX, rt_reg_EX, rd_reg_EX, PCPlus4_EX, Jr_EX, Jump_EX, JumpAddress);
+    IDStage id0(Clk, PCPlus4_ID, PCAddress_ID, Instruction_ID, WriteData, RegWrite_WB, PCSrc, WriteReg_EX, WriteReg_MEM, WriteReg_WB, RegWrite_MEM, RegWrite_control, Jump_MEM, RegWrite_o, ALUSrcB_o, ALUSrcA_o, RegDst_o, Branch_o, MemWrite_o, MemRead_o, MemToReg_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, rs, rt, Immediate, ALUOp_o, Jr_o, Jump_o, v0, v1, IFIDWrite, PCWrite, IFFlush, EXFlush, MEMFlush, PCAddress_shift, Jr_Mux_out);
+    IDEXReg id_ex(Clk, Reset, EXFlush, RegWrite_o, ALUSrcB_o, ALUSrcA_o, RegDst_o, Branch_o, MemWrite_o, MemRead_o, MemToReg_o, HiWrite_o, LoWrite_o, Bne_o, Beq_o, Bgez_o, Bltz_o, Bgtz_o, Blez_o, PCAddress_shift, rs, rt, Immediate, ALUOp_o, Instruction_ID[10:6], Instruction_ID[20:16], Instruction_ID[15:11], PCPlus4_ID, Jr_o, Jump_o, Jr_Mux_out, RegWrite_EX, ALUSrcB_EX, ALUSrcA_EX, RegDst_EX, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, HiWrite_EX, LoWrite_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_EX, rs_EX, rt_EX, Immediate_EX, ALUOp_EX, shamt_EX, rt_reg_EX, rd_reg_EX, PCPlus4_EX, Jr_EX, Jump_EX, JumpAddress);
     
-    EXStage ex0(Clk, Immediate_EX, PCAddress_EX, rs_EX, rt_EX, rt_reg_EX, rd_reg_EX, RegDst_EX, Jr_EX, JumpAddress, ALUOp_EX, RegWrite_EX, shamt_EX, ALUSrcA_EX, ALUSrcB_EX, HiWrite_EX, LoWrite_EX, Zero, RegWrite_control, PCAddress_shift, ALUResult, WriteReg_EX, Jr_Mux_out);
-    EXMEMReg ex_mem(Clk, Reset, MEMFlush, Zero, RegWrite_control, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_shift, ALUResult, rs_EX, rt_EX, WriteReg_EX, PCPlus4_EX, Jump_EX, Jr_Mux_out, Zero_MEM, RegWrite_MEM, Branch_MEM, MemWrite_MEM, MemRead_MEM, MemToReg_MEM, Bne_MEM, Beq_MEM, Bgez_MEM, Bltz_MEM, Bgtz_MEM, Blez_MEM, ALUResult_MEM, PCAddress_MEM, rs_MEM, rt_MEM, WriteReg_MEM, PCPlus4_MEM, Jump_MEM, JumpAddress_MEM);
+    EXStage ex0(Clk, Immediate_EX, rs_EX, rt_EX, rt_reg_EX, rd_reg_EX, RegDst_EX, ALUOp_EX, RegWrite_EX, shamt_EX, ALUSrcA_EX, ALUSrcB_EX, HiWrite_EX, LoWrite_EX, Zero, RegWrite_control, ALUResult, WriteReg_EX);
+    EXMEMReg ex_mem(Clk, Reset, MEMFlush, Zero, RegWrite_control, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_EX, ALUResult, rs_EX, rt_EX, WriteReg_EX, PCPlus4_EX, Jump_EX, JumpAddress, Zero_MEM, RegWrite_MEM, Branch_MEM, MemWrite_MEM, MemRead_MEM, MemToReg_MEM, Bne_MEM, Beq_MEM, Bgez_MEM, Bltz_MEM, Bgtz_MEM, Blez_MEM, ALUResult_MEM, PCAddress_MEM, rs_MEM, rt_MEM, WriteReg_MEM, PCPlus4_MEM, Jump_MEM, JumpAddress_MEM);
 
     MEMStage mem(Clk, Zero_MEM, Bne_MEM, Beq_MEM, Bgez_MEM, Bltz_MEM, Bgtz_MEM, Blez_MEM, rs_MEM[31], Branch_MEM, ALUResult_MEM, rt_MEM, MemWrite_MEM, MemRead_MEM, PCPlus4, JumpAddress_MEM, Jump_MEM, PCSrc, ReadData, JumpMux_out);
     MEMWBReg mem_wb(Clk, Reset, RegWrite_MEM, MemToReg_MEM, ALUResult_MEM, ReadData, WriteReg_MEM, PCPlus4_MEM, RegWrite_WB, MemToReg_WB, ALUResult_WB, ReadData_WB, WriteReg_WB, PCPlus4_WB);

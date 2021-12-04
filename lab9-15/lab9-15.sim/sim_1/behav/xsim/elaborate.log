@@ -19,10 +19,10 @@ Compiling module xil_defaultlib.Control
 Compiling module xil_defaultlib.HazardDetectionUnit
 Compiling module xil_defaultlib.SignExtension
 Compiling module xil_defaultlib.Shifter
+Compiling module xil_defaultlib.Adder
 Compiling module xil_defaultlib.ControlSignalSwitch
 Compiling module xil_defaultlib.IDStage
 Compiling module xil_defaultlib.IDEXReg
-Compiling module xil_defaultlib.Adder
 Compiling module xil_defaultlib.Mux5Bit4To1
 Compiling module xil_defaultlib.ALUControl
 Compiling module xil_defaultlib.ALU32Bit
