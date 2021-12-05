@@ -20,16 +20,18 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MEMWBReg(Clk, Reset, RegWrite_in, MemToReg_in, ALUResult_in, ReadMem_in, write_reg_in, PC_Plus8_in, RegWrite_out, MemToReg_out, ALUResult_out, ReadMem_out, write_reg_out, PC_Plus8_out);
+module MEMWBReg(Clk, Reset, rs_reg_in, rt_reg_in, rd_reg_in, RegWrite_in, MemToReg_in, ALUResult_in, ReadMem_in, write_reg_in, PC_Plus8_in, RegWrite_out, MemToReg_out, ALUResult_out, ReadMem_out, write_reg_out, PC_Plus8_out, rs_reg_out, rt_reg_out, rd_reg_out);
     input Clk, Reset;
     input RegWrite_in;
     input [31:0] ALUResult_in, ReadMem_in, PC_Plus8_in;
     input [4:0] write_reg_in;
+    input [4:0] rs_reg_in, rt_reg_in, rd_reg_in;
     input [1:0] MemToReg_in;
 
     output reg RegWrite_out;
     output reg [31:0] ALUResult_out, ReadMem_out, PC_Plus8_out;
     output reg [4:0] write_reg_out;
+    output reg [4:0] rs_reg_out, rt_reg_out, rd_reg_out;
     output reg [1:0] MemToReg_out;
 
     always @ (posedge Clk) begin
@@ -40,6 +42,9 @@ module MEMWBReg(Clk, Reset, RegWrite_in, MemToReg_in, ALUResult_in, ReadMem_in, 
             write_reg_out <= 0;
             ReadMem_out <= 0;
             PC_Plus8_out <= 0;
+            rs_reg_out <= 0;
+            rt_reg_out <= 0;
+            rd_reg_out <= 0;
         end
         else begin            
             RegWrite_out <= RegWrite_in;
@@ -48,6 +53,9 @@ module MEMWBReg(Clk, Reset, RegWrite_in, MemToReg_in, ALUResult_in, ReadMem_in, 
             write_reg_out <= write_reg_in;
             ReadMem_out <= ReadMem_in;
             PC_Plus8_out <= PC_Plus8_in;
+            rs_reg_out <= rs_reg_in;
+            rt_reg_out <= rt_reg_in;
+            rd_reg_out <= rd_reg_in;            
         end
     end
 endmodule
