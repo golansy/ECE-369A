@@ -26,7 +26,7 @@ module ForwardingUnit(IDEX_Register_Rs, IDEX_Register_Rt, EXMEM_Register_Rd, MEM
     output reg [1:0] ForwardA, ForwardB;
 
     always @ (*) begin
-        //check zybooks chapter 3.7 for more info
+        //check zybooks chapter 3.7 for more info.
         //EX Hazard
         if((EXMEM_RegWrite == 1) && (EXMEM_Register_Rd != 0) && (EXMEM_Register_Rd == IDEX_Register_Rs))begin
             ForwardA <= 2'b01;
