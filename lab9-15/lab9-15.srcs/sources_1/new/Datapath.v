@@ -97,10 +97,10 @@ module Datapath(Clk_in, Reset, out7, en_out);
     Mux32Bit2To1 jr_mux(Jr_Mux_out, JumpAddress, rs_EX, Jr_EX);
     ALUControl alu_control(ALUOp_EX, RegWrite_EX, Immediate_EX[5:0], rt_EX, ALUCntrl, RegWrite_control);
     ForwardingUnit forwarding_unit(rs_reg_EX, rt_reg_EX, rd_reg_MEM, rd_reg_WB, RegWrite_MEM, RegWrite_WB, ForwardA, ForwardB); // <-FIX ME
-    Mux32Bit3To1 alu_src_a(ALU_A_1, rs_EX, ALUResult_MEM, WriteData, ForwardA);
-    Mux32Bit3To1 alu_src_b(ALU_B_1, rt_EX, ALUResult_MEM, WriteData, ForwardB);
+    Mux32Bit3to1 alu_src_a(ALU_A_1, rs_EX, ALUResult_MEM, WriteData, ForwardA);
+    Mux32Bit3to1 alu_src_b(ALU_B_1, rt_EX, ALUResult_MEM, WriteData, ForwardB);
     Mux32Bit2To1 alu_src_a_1(ALU_A, ALU_A_1, {27'b0, shamt_EX}, ALUSrcA_EX);
-    Mux32Bit2to1 alu_src_b_1(ALU_B, ALU_B_1, Immediate_EX, ALUSrcB_EX);
+    Mux32Bit2To1 alu_src_b_1(ALU_B, ALU_B_1, Immediate_EX, ALUSrcB_EX);
     ALU32Bit alu(Clk, ALUCntrl, ALU_A, ALU_B, hi_output, lo_output, ALUResult, Zero, hi_input, lo_input);
     HiLoRegisters hi_lo(Clk, HiWrite_EX, LoWrite_EX, hi_input, lo_input, hi_output, lo_output);
     EXMEMReg ex_mem(Clk, Reset, rs_reg_EX, rt_reg_EX, rd_reg_EX, MEMFlush, Zero, RegWrite_control, Branch_EX, MemWrite_EX, MemRead_EX, MemToReg_EX, Bne_EX, Beq_EX, Bgez_EX, Bltz_EX, Bgtz_EX, Blez_EX, PCAddress_shift, ALUResult, rs_EX, ALU_B_1, WriteReg_EX, PCPlus4_EX, Jump_EX, Jr_Mux_out, Zero_MEM, RegWrite_MEM, Branch_MEM, MemWrite_MEM, MemRead_MEM, MemToReg_MEM, Bne_MEM, Beq_MEM, Bgez_MEM, Bltz_MEM, Bgtz_MEM, Blez_MEM, ALUResult_MEM, PCAddress_MEM, rs_MEM, rt_MEM, WriteReg_MEM, PCPlus4_MEM, Jump_MEM, JumpAddress_MEM, rs_reg_MEM, rt_reg_MEM, rd_reg_MEM);

@@ -2,7 +2,7 @@
 
 //ignore this pls
 
-module Mux32Bit2To1(out, inA, inB, sel_special);
+module Mux32Bit2To1_special(out, inA, inB, sel_special);
 
     output reg [31:0] out;
     
